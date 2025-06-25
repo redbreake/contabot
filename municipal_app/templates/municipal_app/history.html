@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Historial de Ejecuciones{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <h2 class="mb-4">Historial de Ejecuciones del Script</h2>
+
+      {% if history_list %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Fecha y Hora</th>
+              <th scope="col">Monto Imponible</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Salida</th>
+              <th scope="col">Error</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for execution in history_list %}
+              <tr>
+                <td>{{ execution.execution_time|date:"Y-m-d H:i" }}</td>
+                <td>{{ execution.amount }}</td>
+                <td>{{ execution.status }}</td>
+                <td><pre>{{ execution.output|default:"-" }}</pre></td>
+                <td><pre>{{ execution.error|default:"-" }}</pre></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>Aún no hay registros en el historial de ejecuciones.</p>
+      {% endif %}
+
+    </div>
+  </div>
+{% endblock %}

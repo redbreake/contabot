@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="mb-4">Bienvenido, {{ user.username }}</h2>
+
+      <p>Esta es tu página de inicio. Desde aquí puedes acceder a las diferentes funcionalidades de la aplicación.</p>
+
+      {% if not has_municipal_credentials %}
+        <div class="alert alert-warning" role="alert">
+          Aún no has ingresado tus credenciales de la municipalidad. Por favor, <a href="{% url 'municipal_credentials' %}" class="alert-link">ingrésalas aquí</a> para utilizar todas las funcionalidades.
+        </div>
+      {% endif %}
+
+      <div class="list-group">
+        <a href="{% url 'enter_billing' %}" class="list-group-item list-group-item-action">
+          Ingresar Facturación Mensual
+        </a>
+        <a href="{% url 'history' %}" class="list-group-item list-group-item-action">
+          Ver Historial de Ejecuciones
+        </a>
+        <a href="{% url 'profile' %}" class="list-group-item list-group-item-action">
+          Ver y Editar Perfil
+        </a>
+      </div>
+
+    </div>
+  </div>
+{% endblock %}
