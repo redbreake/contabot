@@ -29,6 +29,21 @@
       <h3 class="mt-4">Cambiar Contraseña</h3>
       <p><a href="{% url 'password_change' %}">Cambiar mi contraseña</a></p> {# Assuming 'password_change' is the URL name #}
 
+      <h3 class="mt-4">Credenciales Municipales</h3>
+      {% if has_municipal_credentials == True %}
+        <p>Usuario Municipal: <strong>{{ municipal_username }}</strong></p>
+        <p>Tus credenciales municipales están cargadas.</p>
+      {% else %}
+        <p>Aún no has ingresado tus credenciales municipales.</p>
+      {% endif %}
+      <p><a href="{% url 'municipal_credentials' %}" class="btn btn-info">
+        {% if has_municipal_credentials %}
+          Modificar Credenciales Municipales
+        {% else %}
+          Ingresar Credenciales Municipales
+        {% endif %}
+      </a></p>
+
     </div>
   </div>
 {% endblock %}

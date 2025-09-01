@@ -1,61 +1,104 @@
+import logging
+import os
+import sys # Import sys to print path
+from decimal import Decimal, InvalidOperation # Added for amount validation
+
+from cryptography.fernet import Fernet
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.hashers import make_password, check_password # Importar utilidades de encriptación
-from django.contrib.auth.models import User # Importar el modelo User
-from .forms import MunicipalCredentialsForm, UserProfileForm # Importar UserProfileForm
-from .models import MunicipalCredentials, ExecutionHistory # Importar ExecutionHistory
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.conf import settings
 
-# Create your views here.
+# Print sys.path for debugging
+print("sys.path in views.py:", sys.path)
+
+from .forms import MunicipalCredentialsForm, UserProfileForm, MisionesCredentialsForm, MisionesRecordForm
+from .models import MunicipalCredentials, ExecutionHistory, MisionesCredentials, MisionesRecord
+from munibot import run_munibot
+
+logger = logging.getLogger(__name__)
+
+try:
+    f = Fernet(settings.FERNET_KEY)
+except Exception as e:
+    logger.error(f"Error initializing Fernet: {e}. Ensure FERNET_KEY is set correctly in settings.py")
+    f = None
 
 class RegisterView(generic.CreateView):
     form_class = UserCreationForm
-    success_url = reverse_lazy('dashboard') # Redirigir al dashboard después del registro
+    success_url = reverse_lazy('dashboard')
     template_name = 'registration/register.html'
 
 class MunicipalCredentialsView(LoginRequiredMixin, generic.UpdateView):
     model = MunicipalCredentials
     form_class = MunicipalCredentialsForm
     template_name = 'municipal_app/municipal_credentials_form.html'
-    success_url = reverse_lazy('enter_billing') # Redirigir a la página de ingreso de facturación
+    success_url = reverse_lazy('enter_billing')
 
     def get_object(self, queryset=None):
-        # Obtener o crear las credenciales para el usuario actual
-        obj, created = MunicipalCredentials.objects.get_or_create(user=self.request.user)
-        # Desencriptar la contraseña para mostrarla en el formulario (considerar seguridad real)
-        if obj.municipal_password:
-             # Nota: check_password no desencripta, solo verifica.
-             # Para mostrarla, necesitaríamos un método de encriptación reversible.
-             # Por ahora, solo cargamos el objeto. La plantilla no mostrará la contraseña real.
-             pass # Mantener el campo vacío en el formulario por seguridad
-        return obj
+        logger.debug(f"MunicipalCredentialsView: get_object para usuario {self.request.user.username}")
+        try:
+            obj = MunicipalCredentials.objects.get(user=self.request.user)
+            logger.info(f"MunicipalCredentialsView: Obtenidas credenciales existentes para {self.request.user.username}")
+            return obj
+        except MunicipalCredentials.DoesNotExist:
+            logger.info(f"MunicipalCredentialsView: No existen credenciales para {self.request.user.username}. Se creará una nueva.")
+            return None # Return None if no object exists, form_valid will handle creation
 
     def get(self, request, *args, **kwargs):
-        # Si las credenciales ya existen y están completas, redirigir a la página de ingreso de facturación
+        logger.debug(f"MunicipalCredentialsView: GET request para usuario {request.user.username}")
         credentials = MunicipalCredentials.objects.filter(user=request.user).first()
         if credentials and credentials.municipal_username and credentials.municipal_password:
-            messages.info(request, 'Tus credenciales de la municipalidad ya están cargadas.')
-            # Redirigir al dashboard una vez que esté implementado
-            # return redirect('dashboard')
-            return redirect('enter_billing')
+            logger.info(f"MunicipalCredentialsView: Credenciales completas para {request.user.username}. Mostrando formulario para modificación.")
+            messages.info(request, 'Tus credenciales de la municipalidad ya están cargadas. Puedes modificarlas aquí.')
         elif credentials:
-             messages.info(request, 'Por favor, completa o actualiza tus credenciales de la municipalidad.')
+            logger.info(f"MunicipalCredentialsView: Credenciales incompletas para {request.user.username}. Solicitando actualización.")
+            messages.info(request, 'Por favor, completa o actualiza tus credenciales de la municipalidad.')
         else:
-             messages.info(request, 'Aún no has ingresado tus credenciales de la municipalidad.')
+            logger.info(f"MunicipalCredentialsView: No hay credenciales para {request.user.username}. Solicitando ingreso.")
+            messages.info(request, 'Aún no has ingresado tus credenciales de la municipalidad.')
 
         return super().get(request, *args, **kwargs)
 
-
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        # Encriptar la contraseña antes de guardarla
-        form.instance.municipal_password = make_password(form.cleaned_data['municipal_password'])
-        return super().form_valid(form)
+        logger.debug(f"MunicipalCredentialsView: form_valid para usuario {self.request.user.username}")
+        
+        # If no instance exists, create one
+        if not form.instance.pk:
+            form.instance.user = self.request.user
+            logger.info(f"MunicipalCredentialsView: Creando nuevas credenciales para {self.request.user.username}")
+        
+        municipal_password_plain = form.cleaned_data.get('municipal_password_plain')
+        
+        if municipal_password_plain:
+            if f:
+                encrypted_password = f.encrypt(municipal_password_plain.encode())
+                form.instance.municipal_password = encrypted_password
+                logger.info(f"MunicipalCredentialsView: Contraseña cifrada para {self.request.user.username}.")
+            else:
+                logger.error(f"MunicipalCredentialsView: Fernet no inicializado. No se pudo cifrar la contraseña para {self.request.user.username}.")
+                messages.error(self.request, 'Error de seguridad: No se pudo cifrar la contraseña. Contacta al administrador.')
+                return self.form_invalid(form)
+        elif not form.instance.pk: # If it's a new instance and no password was provided
+            logger.error(f"MunicipalCredentialsView: No se proporcionó contraseña para un nuevo registro de credenciales para {self.request.user.username}.")
+            messages.error(self.request, 'Por favor, ingresa la contraseña municipal.')
+            return self.form_invalid(form)
+        
+        response = super().form_valid(form)
+        logger.info(f"MunicipalCredentialsView: Credenciales guardadas/actualizadas para {self.request.user.username}. Username: {form.instance.municipal_username}")
+        return response
 
-import subprocess
-from django.contrib import messages
+    def form_invalid(self, form):
+        logger.debug(f"MunicipalCredentialsView: form_invalid para usuario {self.request.user.username}")
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"{form.fields[field].label}: {error}")
+        return self.render_to_response(self.get_context_data(form=form))
 
 class EnterBillingView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'municipal_app/enter_billing.html'
@@ -64,70 +107,209 @@ class EnterBillingView(LoginRequiredMixin, generic.TemplateView):
         monto = request.POST.get('monto')
         user = request.user
 
+        logger.debug(f"EnterBillingView: POST request para usuario {user.username}")
+        logger.debug(f"EnterBillingView: Monto recibido: {monto}")
+
         execution_status = 'Failed'
         execution_output = None
         execution_error = None
 
         try:
-            # Recuperar credenciales de la municipalidad
             credentials = MunicipalCredentials.objects.get(user=user)
-            municipal_username = credentials.municipal_username
-            # Implementación temporal insegura para demostración:
-            municipal_password = credentials.municipal_password # **RIESGO DE SEGURIDAD**
+            municipal_username = str(credentials.municipal_username or '')
+            
+            municipal_password_encrypted = credentials.municipal_password
+            municipal_password = ''
+            if f and municipal_password_encrypted:
+                try:
+                    municipal_password = f.decrypt(municipal_password_encrypted).decode()
+                    logger.debug(f"EnterBillingView: Contraseña descifrada para {user.username}.")
+                except Exception as decrypt_e:
+                    execution_error = f'Error al descifrar la contraseña: {decrypt_e}'
+                    logger.error(f"EnterBillingView: {execution_error}")
+                    messages.error(request, 'Error de seguridad: No se pudo descifrar la contraseña. Contacta al administrador.')
+                    raise
+            else:
+                execution_error = 'Error de seguridad: No se pudo descifrar la contraseña. Fernet no inicializado o contraseña vacía.'
+                logger.error(f"EnterBillingView: {execution_error}")
+                messages.error(request, 'Error de seguridad: No se pudo descifrar la contraseña. Contacta al administrador.')
+                raise Exception("Fernet not initialized or encrypted password missing.")
 
-            # Ejecutar munibot.py como un proceso separado
-            script_path = 'munibot.py' # Ajusta la ruta si es necesario
-            result = subprocess.run(
-                [sys.executable, script_path, municipal_username, municipal_password, monto],
-                capture_output=True,
-                text=True,
-                check=True # Lanza una excepción si el script retorna un código de error
-            )
+            logger.debug(f"EnterBillingView: Credenciales recuperadas. Usuario: {municipal_username}, Contraseña (descifrada): {municipal_password[:10]}...")
 
-            execution_status = 'Success'
-            execution_output = result.stdout
-            messages.success(request, 'El proceso de facturación se ha ejecutado correctamente.')
-            # Opcional: mostrar la salida del script
-            # messages.info(request, f'Salida del script: {result.stdout}')
+            monto_str = str(monto) if monto is not None else ''
+            logger.debug(f"EnterBillingView: Monto a pasar al script: {monto_str}")
+
+            # Ruta al driver de Edge
+            driver_path = os.path.join(settings.BASE_DIR, 'edgedriver_win64', 'msedgedriver.exe')
+            logger.debug(f"EnterBillingView: Usando driver path: {driver_path}")
+
+            # Ejecutar munibot.py directamente
+            run_status, run_output, run_error = run_munibot(municipal_username, municipal_password, monto_str, driver_path)
+
+            execution_status = run_status
+            execution_output = run_output
+            execution_error = run_error
+
+            if execution_status == 'Success':
+                logger.info(f"EnterBillingView: Script ejecutado con éxito. Salida: {execution_output}")
+                messages.success(request, 'El proceso de declaración jurada mensual se ha ejecutado correctamente.')
+            else:
+                logger.error(f"EnterBillingView: Error al ejecutar el script. Error: {execution_error}")
+                messages.error(request, f'Error al ejecutar el script: {execution_error}')
 
         except MunicipalCredentials.DoesNotExist:
             execution_error = 'Credenciales de la municipalidad no encontradas.'
+            logger.error(f"EnterBillingView: Error: {execution_error}")
             messages.error(request, 'Por favor, ingresa tus credenciales de la municipalidad primero.')
             return redirect('municipal_credentials')
-        except subprocess.CalledProcessError as e:
-            execution_error = f'Error al ejecutar el script: {e.stderr}'
-            messages.error(request, f'Error al ejecutar el script: {e.stderr}')
         except Exception as e:
-            execution_error = f'Ocurrió un error: {e}'
+            execution_error = f'Ocurrió un error inesperado: {e}'
+            logger.error(f"EnterBillingView: Ocurrió un error inesperado: {e}")
             messages.error(request, f'Ocurrió un error: {e}')
         finally:
-            # Guardar registro en el historial de ejecuciones
+            logger.debug(f"EnterBillingView: Guardando historial de ejecución. Estado: {execution_status}, Monto: {monto}, Error: {execution_error}")
+
+            amount_to_save = None
+            if monto:
+                try:
+                    amount_to_save = Decimal(monto)
+                except InvalidOperation:
+                    # El monto no es un número válido, se guarda como nulo
+                    logger.warning(f"Valor de monto no válido '{monto}' recibido del usuario {user.username}")
+                    amount_to_save = None
+
             ExecutionHistory.objects.create(
                 user=user,
-                amount=monto,
+                amount=amount_to_save, # Usar el valor validado
                 status=execution_status,
                 output=execution_output,
                 error=execution_error
             )
 
-        return redirect('enter_billing') # Redirigir de vuelta a la página de ingreso de facturación
-
-
-class ProfileView(LoginRequiredMixin, generic.UpdateView):
-    model = User # Usar el modelo User
-    form_class = UserProfileForm # Usar el nuevo formulario de perfil de usuario
-    template_name = 'municipal_app/profile.html'
-    success_url = reverse_lazy('profile') # Redirigir a la misma página después de actualizar
-
-    def get_object(self, queryset=None):
-        # Devolver la instancia del usuario autenticado
-        return self.request.user
+        return redirect('enter_billing')
 
 class ExecutionHistoryView(LoginRequiredMixin, generic.ListView):
     model = ExecutionHistory
     template_name = 'municipal_app/history.html'
     context_object_name = 'history_list'
-    ordering = ['-execution_time'] # Ordenar por fecha/hora descendente
+    ordering = ['-execution_time']
+
+class ProfileView(LoginRequiredMixin, generic.UpdateView):
+    model = User
+    form_class = UserProfileForm
+    template_name = 'municipal_app/profile.html'
+    success_url = reverse_lazy('profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        try:
+            municipal_credentials = MunicipalCredentials.objects.get(user=user)
+            context['municipal_username'] = municipal_credentials.municipal_username
+            context['has_municipal_credentials'] = bool(municipal_credentials.municipal_username and municipal_credentials.municipal_password)
+            logger.debug(f"ProfileView: Credenciales encontradas para {user.username}. Username: {municipal_credentials.municipal_username}, Has password: {bool(municipal_credentials.municipal_password)}")
+        except MunicipalCredentials.DoesNotExist:
+            context['municipal_username'] = None
+            context['has_municipal_credentials'] = False
+            logger.debug(f"ProfileView: No se encontraron credenciales para {user.username}.")
+
+        logger.debug(f"ProfileView: Valor final de has_municipal_credentials en contexto: {context.get('has_municipal_credentials')}, Tipo: {type(context.get('has_municipal_credentials'))}")
+        return context
+
+class MisionesCredentialsView(LoginRequiredMixin, generic.UpdateView):
+    model = MisionesCredentials
+    form_class = MisionesCredentialsForm
+    template_name = 'municipal_app/misiones_credentials_form.html'
+    success_url = reverse_lazy('enter_misiones')
+
+    def get_object(self, queryset=None):
+        logger.debug(f"MisionesCredentialsView: get_object para usuario {self.request.user.username}")
+        try:
+            obj = MisionesCredentials.objects.get(user=self.request.user)
+            logger.info(f"MisionesCredentialsView: Credenciales existentes encontradas para {self.request.user.username}")
+            return obj
+        except MisionesCredentials.DoesNotExist:
+            logger.info(f"MisionesCredentialsView: No existen credenciales para {self.request.user.username}. Se creará una nueva.")
+            return None
+
+    def get(self, request, *args, **kwargs):
+        logger.debug(f"MisionesCredentialsView: GET request para usuario {request.user.username}")
+        credentials = MisionesCredentials.objects.filter(user=request.user).first()
+        if credentials and credentials.misiones_username and credentials.misiones_password:
+            logger.info(f"MisionesCredentialsView: Credenciales completas para {request.user.username}. Mostrando formulario para modificación.")
+            messages.info(request, 'Tus credenciales de Renta Misiones ya están cargadas. Puedes modificarlas aquí.')
+        elif credentials:
+            logger.info(f"MisionesCredentialsView: Credenciales incompletas para {request.user.username}. Solicitando actualización.")
+            messages.info(request, 'Por favor, completa o actualiza tus credenciales de Renta Misiones.')
+        else:
+            logger.info(f"MisionesCredentialsView: No hay credenciales para {request.user.username}. Solicitando ingreso.")
+            messages.info(request, 'Aún no has ingresado tus credenciales de Renta Misiones.')
+
+        return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        logger.debug(f"MisionesCredentialsView: form_valid para usuario {self.request.user.username}")
+
+        if not form.instance.pk:
+            form.instance.user = self.request.user
+            logger.info(f"MisionesCredentialsView: Creando nuevas credenciales para {self.request.user.username}")
+
+        misiones_password_plain = form.cleaned_data.get('misiones_password_plain')
+
+        if misiones_password_plain:
+            if f:
+                encrypted_password = f.encrypt(misiones_password_plain.encode())
+                form.instance.misiones_password = encrypted_password
+                logger.info(f"MisionesCredentialsView: Contraseña cifrada para {self.request.user.username}.")
+            else:
+                logger.error(f"MisionesCredentialsView: Fernet no inicializado. No se pudo cifrar la contraseña para {self.request.user.username}.")
+                messages.error(self.request, 'Error de seguridad: No se pudo cifrar la contraseña. Contacta al administrador.')
+                return self.form_invalid(form)
+        elif not form.instance.pk:
+            logger.error(f"MisionesCredentialsView: No se proporcionó contraseña para un nuevo registro de credenciales para {self.request.user.username}.")
+            messages.error(self.request, 'Por favor, ingresa la contraseña de Renta Misiones.')
+            return self.form_invalid(form)
+
+        response = super().form_valid(form)
+        logger.info(f"MisionesCredentialsView: Credenciales guardadas/actualizadas para {self.request.user.username}. Username: {form.instance.misiones_username}")
+        return response
+
+    def form_invalid(self, form):
+        logger.debug(f"MisionesCredentialsView: form_invalid para usuario {self.request.user.username}")
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"{form.fields[field].label}: {error}")
+        return self.render_to_response(self.get_context_data(form=form))
+
+class EnterMisionesView(LoginRequiredMixin, generic.FormView):
+    form_class = MisionesRecordForm
+    template_name = 'municipal_app/enter_misiones.html'
+    success_url = reverse_lazy('misiones_history')
+
+    def form_valid(self, form):
+        logger.debug(f"EnterMisionesView: form_valid para usuario {self.request.user.username}")
+
+        record = form.save(commit=False)
+        record.user = self.request.user
+        record.save()
+        logger.info(f"EnterMisionesView: Registro de alquiler guardado para {self.request.user.username}")
+
+        messages.success(self.request, 'Información de alquiler guardada correctamente.')
+        return super().form_valid(form)
+
+class MisionesHistoryView(LoginRequiredMixin, generic.ListView):
+    model = MisionesRecord
+    template_name = 'municipal_app/misiones_history.html'
+    context_object_name = 'misiones_list'
+    ordering = ['-record_date']
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
 
 class DashboardView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'municipal_app/dashboard.html'
@@ -135,59 +317,12 @@ class DashboardView(LoginRequiredMixin, generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        context['user'] = user # Pasar el objeto user al contexto
+        context['user'] = user
 
-        # Verificar si el usuario tiene credenciales municipales completas
         try:
             credentials = MunicipalCredentials.objects.get(user=user)
             context['has_municipal_credentials'] = bool(credentials.municipal_username and credentials.municipal_password)
         except MunicipalCredentials.DoesNotExist:
             context['has_municipal_credentials'] = False
-
         return context
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        messages.success(self.request, 'Credenciales de la municipalidad actualizadas correctamente.')
-        return super().form_valid(form)
-
-        try:
-            # Recuperar credenciales de la municipalidad
-            credentials = MunicipalCredentials.objects.get(user=user)
-            municipal_username = credentials.municipal_username
-            # Desencriptar la contraseña (check_password verifica, no desencripta directamente)
-            # Para pasarla al script, necesitamos la contraseña original.
-            # Esto requiere un método de encriptación reversible o almacenar la contraseña original de forma segura.
-            # Por ahora, asumiremos que check_password es suficiente para validar (aunque no lo es para recuperar).
-            # **NOTA DE SEGURIDAD:** En una aplicación real, NO se debe almacenar la contraseña de la municipalidad en texto plano o con encriptación fácilmente reversible.
-            # Se recomienda usar un enfoque más seguro, como un servicio de gestión de secretos o que el usuario la ingrese en cada ejecución.
-            # Para este ejemplo, y dado que check_password no desencripta, no podemos pasar la contraseña original al script sin almacenarla de forma insegura.
-            # Si el script *realmente* necesita la contraseña en texto plano, se debe reconsiderar la arquitectura de seguridad.
-            # Para continuar con la ejecución del script como se planeó (pasando usuario/contraseña),
-            # temporalmente usaremos la contraseña almacenada directamente, **reconociendo el riesgo de seguridad**.
-            # Implementación temporal insegura para demostración:
-            municipal_password = credentials.municipal_password # **RIESGO DE SEGURIDAD**
-
-            # Ejecutar munibot.py como un proceso separado
-            # Asegúrate de que la ruta al script sea correcta
-            script_path = 'munibot.py' # Ajusta la ruta si es necesario
-            result = subprocess.run(
-                [sys.executable, script_path, municipal_username, municipal_password, monto],
-                capture_output=True,
-                text=True,
-                check=True # Lanza una excepción si el script retorna un código de error
-            )
-
-            messages.success(request, 'El proceso de facturación se ha ejecutado correctamente.')
-            # Opcional: mostrar la salida del script
-            # messages.info(request, f'Salida del script: {result.stdout}')
-
-        except MunicipalCredentials.DoesNotExist:
-            messages.error(request, 'Por favor, ingresa tus credenciales de la municipalidad primero.')
-            return redirect('municipal_credentials')
-        except subprocess.CalledProcessError as e:
-            messages.error(request, f'Error al ejecutar el script: {e.stderr}')
-        except Exception as e:
-            messages.error(request, f'Ocurrió un error: {e}')
-
-        return redirect('enter_billing') # Redirigir de vuelta a la página de ingreso de facturación

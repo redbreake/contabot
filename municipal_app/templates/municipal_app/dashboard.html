@@ -16,16 +16,26 @@
       {% endif %}
 
       <div class="list-group">
-        <a href="{% url 'enter_billing' %}" class="list-group-item list-group-item-action">
-          Ingresar Facturación Mensual
-        </a>
-        <a href="{% url 'history' %}" class="list-group-item list-group-item-action">
-          Ver Historial de Ejecuciones
-        </a>
-        <a href="{% url 'profile' %}" class="list-group-item list-group-item-action">
-          Ver y Editar Perfil
-        </a>
-      </div>
+       <div class="d-grid gap-2 mb-4"> {# d-grid para botón de ancho completo, gap-2 para espacio, mb-4 para margen inferior #}
+         <a href="{% url 'enter_billing' %}" class="btn btn-primary btn-lg">
+           Ingresar Facturación Mensual
+         </a>
+       </div>
+       <div class="d-grid gap-2 mb-4">
+         <a href="{% url 'enter_misiones' %}" class="btn btn-success btn-lg">
+           Ingresar Renta Misiones
+         </a>
+       </div>
+       <a href="{% url 'history' %}" class="list-group-item list-group-item-action">
+         Ver Historial de Ejecuciones
+       </a>
+       <a href="{% url 'misiones_history' %}" class="list-group-item list-group-item-action">
+         Historial Renta Misiones
+       </a>
+       <a href="{% url 'profile' %}" class="list-group-item list-group-item-action">
+         Ver y Editar Perfil
+       </a>
+     </div>
 
     </div>
   </div>

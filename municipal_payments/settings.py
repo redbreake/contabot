@@ -1,3 +1,8 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 """
 Django settings for municipal_payments project.
 
@@ -13,14 +18,17 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import sys
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR)) # Add BASE_DIR to sys.path for module discovery
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-+wsz72x9nyoftz7zh$p_g8t^*6mzsftaop*)ku2w7$mmiwg!i^"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -130,3 +138,37 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # URL para redirigir después del login
 LOGIN_REDIRECT_URL = '/dashboard/'
+LOGIN_URL = '/login/' # Asegurarse de que Django use tu URL de login
+
+# Clave Fernet para cifrado de contraseñas municipales
+# ADVERTENCIA DE SEGURIDAD: En producción, esta clave DEBE ser una variable de entorno
+# y NUNCA debe ser commiteada al control de versiones.
+# Puedes generar una con: from cryptography.fernet import Fernet; Fernet.generate_key().decode()
+FERNET_KEY = os.getenv('FERNET_KEY')
+
+# Configuración de Logging para depuración
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'municipal_app': { # Nombre de tu aplicación
+            'handlers': ['console'],
+            'level': 'DEBUG', # O 'INFO'
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}

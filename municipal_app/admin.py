@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import MunicipalCredentials, ExecutionHistory
 
-# Register your models here.
+admin.site.register(MunicipalCredentials)
+admin.site.register(ExecutionHistory)

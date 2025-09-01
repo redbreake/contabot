@@ -25,3 +25,5 @@ __pycache__/
 # Ignorar archivos de sistema operativo
 .DS_Store
 Thumbs.db
+.env
+edgedriver_win64/

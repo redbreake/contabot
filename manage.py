@@ -2,10 +2,16 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+import os
 
 def main():
     """Run administrative tasks."""
+    # Add the project root to sys.path
+    # This is necessary when manage.py is not in the same directory as the main project package.
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+    if project_root not in sys.path:
+        sys.path.insert(0, project_root)
+
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "municipal_payments.settings")
     try:
         from django.core.management import execute_from_command_line

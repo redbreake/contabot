@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Historial de Renta Misiones{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <h2 class="mb-4">Historial de Registros de Renta Misiones</h2>
+
+      {% if misiones_list %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Fecha y Hora</th>
+              <th scope="col">Nombre Inquilino</th>
+              <th scope="col">Email Inquilino</th>
+              <th scope="col">Inicio Alquiler</th>
+              <th scope="col">Fin Alquiler</th>
+              <th scope="col">Monto</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Adjunto</th>
+              <th scope="col">Notas</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for record in misiones_list %}
+              <tr>
+                <td>{{ record.record_date|date:"Y-m-d H:i" }}</td>
+                <td>{{ record.tenant_name }}</td>
+                <td>{{ record.tenant_email|default:"-" }}</td>
+                <td>{{ record.rental_period_start|date:"Y-m-d" }}</td>
+                <td>{{ record.rental_period_end|date:"Y-m-d" }}</td>
+                <td>{{ record.amount }}</td>
+                <td>{{ record.status }}</td>
+                <td>
+                  {% if record.attachment %}
+                    <a href="{{ record.attachment.url }}" target="_blank">Ver Archivo</a>
+                  {% else %}
+                    -
+                  {% endif %}
+                </td>
+                <td>{{ record.notes|default:"-" }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>Aún no hay registros en el historial de Renta Misiones.</p>
+      {% endif %}
+
+    </div>
+  </div>
+{% endblock %}
