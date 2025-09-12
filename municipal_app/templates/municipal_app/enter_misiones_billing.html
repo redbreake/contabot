@@ -2,20 +2,20 @@
 
 {% load static %}
 
-{% block title %}Ingresar Facturación{% endblock %}
+{% block title %}Ingresar Monto Imponible de Renta Misiones{% endblock %}
 
 {% block content %}
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <img src="{% static 'municipalidad.png' %}" class="mb-3 d-block msy-auto" style="max-height: 60px;" alt="Logo Municipalidad">
-      <h2 class="mb-4">Ingresar Monto Imponible Mensual</h2>
+      <img src="{% static 'renta.png' %}" class="mb-3 d-block mx-auto" style="height: 60px; width: 60px; object-fit: cover;" alt="Logo Renta Misiones">
+      <h2 class="mb-4">Ingresar Monto Imponible Mensual de Renta Misiones</h2>
       <form method="post">
         {% csrf_token %}
         <div class="mb-3">
           <label for="monto" class="form-label">Monto Imponible:</label>
           <input type="number" class="form-control" id="monto" name="monto" step="0.01" required>
         </div>
-        <button type="submit" class="btn btn-primary">Procesar Facturación</button>
+        <button type="submit" class="btn btn-primary">Procesar Facturación de Renta Misiones</button>
       </form>
     </div>
   </div>

@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
-from .views import RegisterView, MunicipalCredentialsView, EnterBillingView, ProfileView, ExecutionHistoryView, DashboardView, MisionesCredentialsView, EnterMisionesView, MisionesHistoryView # Importar DashboardView
+from .views import RegisterView, MunicipalCredentialsView, EnterBillingView, ProfileView, ExecutionHistoryView, DashboardView, MisionesCredentialsView, EnterMisionesBillingView, MisionesHistoryView, AdminDashboardView
 
 urlpatterns = [
     # URL raíz que redirige a login
@@ -27,8 +27,11 @@ urlpatterns = [
     # URL para el dashboard
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
 
+    # URL para admin dashboard
+    path('admin-dashboard/', AdminDashboardView.as_view(), name='admin_dashboard'),
+
     # URLs para Renta Misiones
     path('misiones-credentials/', MisionesCredentialsView.as_view(), name='misiones_credentials'),
-    path('enter-misiones/', EnterMisionesView.as_view(), name='enter_misiones'),
+    path('enter-misiones/', EnterMisionesBillingView.as_view(), name='enter_misiones'),
     path('misiones-history/', MisionesHistoryView.as_view(), name='misiones_history'),
 ]

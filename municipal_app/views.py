@@ -17,9 +17,13 @@ from django.conf import settings
 # Print sys.path for debugging
 print("sys.path in views.py:", sys.path)
 
-from .forms import MunicipalCredentialsForm, UserProfileForm, MisionesCredentialsForm, MisionesRecordForm
-from .models import MunicipalCredentials, ExecutionHistory, MisionesCredentials, MisionesRecord
+from .forms import MunicipalCredentialsForm, UserProfileForm, MisionesCredentialsForm
+from .models import MunicipalCredentials, ExecutionHistory, MisionesCredentials, MisionesExecutionHistory
 from munibot import run_munibot
+try:
+    from rentabot import run_rentabot
+except ImportError:
+    run_rentabot = None
 
 logger = logging.getLogger(__name__)
 
@@ -218,6 +222,16 @@ class ProfileView(LoginRequiredMixin, generic.UpdateView):
             context['has_municipal_credentials'] = False
             logger.debug(f"ProfileView: No se encontraron credenciales para {user.username}.")
 
+        try:
+            misiones_credentials = MisionesCredentials.objects.get(user=user)
+            context['misiones_username'] = misiones_credentials.misiones_username
+            context['has_misiones_credentials'] = bool(misiones_credentials.misiones_username and misiones_credentials.misiones_password)
+            logger.debug(f"ProfileView: Credenciales de misiones encontradas para {user.username}. Username: {misiones_credentials.misiones_username}, Has password: {bool(misiones_credentials.misiones_password)}")
+        except MisionesCredentials.DoesNotExist:
+            context['misiones_username'] = None
+            context['has_misiones_credentials'] = False
+            logger.debug(f"ProfileView: No se encontraron credenciales de misiones para {user.username}.")
+
         logger.debug(f"ProfileView: Valor final de has_municipal_credentials en contexto: {context.get('has_municipal_credentials')}, Tipo: {type(context.get('has_municipal_credentials'))}")
         return context
 
@@ -228,7 +242,8 @@ class MisionesCredentialsView(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy('enter_misiones')
 
     def get_object(self, queryset=None):
-        logger.debug(f"MisionesCredentialsView: get_object para usuario {self.request.user.username}")
+        if not self.request.user.is_authenticated:
+            return None
         try:
             obj = MisionesCredentials.objects.get(user=self.request.user)
             logger.info(f"MisionesCredentialsView: Credenciales existentes encontradas para {self.request.user.username}")
@@ -286,27 +301,103 @@ class MisionesCredentialsView(LoginRequiredMixin, generic.UpdateView):
                 messages.error(self.request, f"{form.fields[field].label}: {error}")
         return self.render_to_response(self.get_context_data(form=form))
 
-class EnterMisionesView(LoginRequiredMixin, generic.FormView):
-    form_class = MisionesRecordForm
-    template_name = 'municipal_app/enter_misiones.html'
-    success_url = reverse_lazy('misiones_history')
+class EnterMisionesBillingView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'municipal_app/enter_misiones_billing.html'
 
-    def form_valid(self, form):
-        logger.debug(f"EnterMisionesView: form_valid para usuario {self.request.user.username}")
+    def post(self, request, *args, **kwargs):
+        monto = request.POST.get('monto')
+        user = self.request.user
 
-        record = form.save(commit=False)
-        record.user = self.request.user
-        record.save()
-        logger.info(f"EnterMisionesView: Registro de alquiler guardado para {self.request.user.username}")
+        logger.debug(f"EnterMisionesBillingView: POST request para usuario {user.username}")
+        logger.debug(f"EnterMisionesBillingView: Monto recibido: {monto}")
 
-        messages.success(self.request, 'Información de alquiler guardada correctamente.')
-        return super().form_valid(form)
+        execution_status = 'Failed'
+        execution_output = None
+        execution_error = None
+
+        try:
+            credentials = MisionesCredentials.objects.get(user=user)
+            misiones_username = str(credentials.misiones_username or '')
+            
+            misiones_password_encrypted = credentials.misiones_password
+            misiones_password = ''
+            if f and misiones_password_encrypted:
+                try:
+                    misiones_password = f.decrypt(misiones_password_encrypted).decode()
+                    logger.debug(f"EnterMisionesBillingView: Contraseña descifrada para {user.username}.")
+                except Exception as decrypt_e:
+                    execution_error = f'Error al descifrar la contraseña: {decrypt_e}'
+                    logger.error(f"EnterMisionesBillingView: {execution_error}")
+                    messages.error(self.request, 'Error de seguridad: No se pudo descifrar la contraseña. Contacta al administrador.')
+                    raise
+            else:
+                execution_error = 'Error de seguridad: No se pudo descifrar la contraseña. Fernet no inicializado o contraseña vacía.'
+                logger.error(f"EnterMisionesBillingView: {execution_error}")
+                messages.error(self.request, 'Error de seguridad: No se pudo descifrar la contraseña. Contacta al administrador.')
+                raise Exception("Fernet not initialized or encrypted password missing.")
+
+            logger.debug(f"EnterMisionesBillingView: Credenciales recuperadas. Usuario: {misiones_username}, Contraseña (descifrada): {misiones_password[:10]}...")
+
+            monto_str = str(monto) if monto is not None else ''
+            logger.debug(f"EnterMisionesBillingView: Monto a pasar al script: {monto_str}")
+
+            # Ruta al driver de Edge
+            driver_path = os.path.join(settings.BASE_DIR, 'edgedriver_win64', 'msedgedriver.exe')
+            logger.debug(f"EnterMisionesBillingView: Usando driver path: {driver_path}")
+
+            # Ejecutar rentabot.py directamente
+            if run_rentabot:
+                run_status, run_output, run_error = run_rentabot(misiones_username, misiones_password, monto_str, driver_path)
+            else:
+                run_status, run_output, run_error = ('Failed', 'rentabot not implemented yet', 'rentabot module not found')
+
+            execution_status = run_status
+            execution_output = run_output
+            execution_error = run_error
+
+            if execution_status == 'Success':
+                logger.info(f"EnterMisionesBillingView: Script ejecutado con éxito. Salida: {execution_output}")
+                messages.success(self.request, 'El proceso de declaración de facturación mensual en Renta Misiones se ha ejecutado correctamente.')
+            else:
+                logger.error(f"EnterMisionesBillingView: Error al ejecutar el script. Error: {execution_error}")
+                messages.error(self.request, f'Error al ejecutar el script: {execution_error}')
+
+        except MisionesCredentials.DoesNotExist:
+            execution_error = 'Credenciales de Renta Misiones no encontradas.'
+            logger.error(f"EnterMisionesBillingView: Error: {execution_error}")
+            messages.error(self.request, 'Por favor, ingresa tus credenciales de Renta Misiones primero.')
+            return redirect('misiones_credentials')
+        except Exception as e:
+            execution_error = f'Ocurrió un error inesperado: {e}'
+            logger.error(f"EnterMisionesBillingView: Ocurrió un error inesperado: {e}")
+            messages.error(self.request, f'Ocurrió un error: {e}')
+        finally:
+            logger.debug(f"EnterMisionesBillingView: Guardando historial de ejecución. Estado: {execution_status}, Monto: {monto}, Error: {execution_error}")
+
+            amount_to_save = None
+            if monto:
+                try:
+                    amount_to_save = Decimal(monto)
+                except InvalidOperation:
+                    # El monto no es un número válido, se guarda como nulo
+                    logger.warning(f"Valor de monto no válido '{monto}' recibido del usuario {user.username}")
+                    amount_to_save = None
+
+            MisionesExecutionHistory.objects.create(
+                user=user,
+                amount=amount_to_save, # Usar el valor validado
+                status=execution_status,
+                output=execution_output,
+                error=execution_error
+            )
+
+        return redirect('enter_missions')
 
 class MisionesHistoryView(LoginRequiredMixin, generic.ListView):
-    model = MisionesRecord
+    model = MisionesExecutionHistory
     template_name = 'municipal_app/misiones_history.html'
     context_object_name = 'misiones_list'
-    ordering = ['-record_date']
+    ordering = ['-id']
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
@@ -324,5 +415,93 @@ class DashboardView(LoginRequiredMixin, generic.TemplateView):
             context['has_municipal_credentials'] = bool(credentials.municipal_username and credentials.municipal_password)
         except MunicipalCredentials.DoesNotExist:
             context['has_municipal_credentials'] = False
+
+        try:
+            misiones_credentials = MisionesCredentials.objects.get(user=user)
+            context['has_misiones_credentials'] = bool(misiones_credentials.misiones_username and misiones_credentials.misiones_password)
+        except MisionesCredentials.DoesNotExist:
+            context['has_misiones_credentials'] = False
+
         return context
 
+
+class AdminDashboardView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'municipal_app/admin_dashboard.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            return redirect('dashboard')
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if 'toggle_superuser' in request.POST:
+            user_id = request.POST.get('user_id')
+            try:
+                user_to_toggle = User.objects.get(id=user_id)
+                if user_to_toggle != request.user:
+                    user_to_toggle.is_superuser ^= True
+                    user_to_toggle.save()
+                    status = "removido" if not user_to_toggle.is_superuser else "asignado"
+                    messages.success(request, f'Privilegio de superusuario {status} para {user_to_toggle.username}.')
+                else:
+                    messages.error(request, 'No puedes cambiar tu propio privilegio.')
+            except User.DoesNotExist:
+                messages.error(request, 'Usuario no encontrado.')
+        return redirect('admin_dashboard')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Estadísticas básicas
+        context['users_count'] = User.objects.count()
+        context['municipal_credentials_count'] = MunicipalCredentials.objects.count()
+        context['misiones_credentials_count'] = MisionesCredentials.objects.count()
+        context['execution_history_count'] = ExecutionHistory.objects.count()
+        context['misiones_execution_history_count'] = MisionesExecutionHistory.objects.count()
+
+        # Usuario activos (último login en últimos 30 días)
+        from django.utils import timezone
+        from datetime import timedelta
+        active_threshold = timezone.now() - timedelta(days=30)
+        context['active_users_count'] = User.objects.filter(last_login__gte=active_threshold).count()
+
+        # Gráfico de ejecuciones por mes (últimos 6 meses)
+        from django.db.models import Count
+        from django.db.models.functions import TruncMonth
+
+        six_months_ago = timezone.now() - timedelta(days=180)
+
+        executions_monthly = ExecutionHistory.objects.filter(
+            execution_time__gte=six_months_ago
+        ).annotate(
+            month=TruncMonth('execution_time')
+        ).values('month').annotate(count=Count('id')).order_by('month')
+
+        misiones_executions_monthly = MisionesExecutionHistory.objects.filter(
+            execution_time__gte=six_months_ago
+        ).annotate(
+            month=TruncMonth('execution_time')
+        ).values('month').annotate(count=Count('id')).order_by('month')
+
+        # Para gráficos
+        context['executions_labels'] = [e['month'].strftime('%Y-%m') for e in executions_monthly]
+        context['executions_data'] = [e['count'] for e in executions_monthly]
+        context['misiones_executions_labels'] = [e['month'].strftime('%Y-%m') for e in misiones_executions_monthly]
+        context['misiones_executions_data'] = [e['count'] for e in misiones_executions_monthly]
+
+        # Success/Fail rate
+        success_count = ExecutionHistory.objects.filter(status='Success').count()
+        fail_count = ExecutionHistory.objects.filter(status__in=['Failed', '']).count()
+        total_execs = ExecutionHistory.objects.count()
+        context['success_rate'] = (success_count / total_execs) * 100 if total_execs > 0 else 0
+        context['success_fail_labels'] = ['Éxito', 'Fallo']
+        context['success_fail_data'] = [success_count, fail_count]
+
+        # Todos los usuarios para gestionar privilegios (últimos 50 por fecha)
+        context['all_users'] = User.objects.all().order_by('-date_joined')[:50]
+
+        # Logins recientes
+        recent_logins = User.objects.exclude(last_login__isnull=True).order_by('-last_login')[:5]
+        context['recent_logins'] = recent_logins
+
+        return context

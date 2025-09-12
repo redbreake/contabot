@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm # Importar UserChangeForm
 from django.contrib.auth.models import User # Importar el modelo User
-from .models import MunicipalCredentials, MisionesCredentials, MisionesRecord
+from .models import MunicipalCredentials, MisionesCredentials
 
 class MunicipalCredentialsForm(forms.ModelForm):
     class Meta:
@@ -40,17 +40,3 @@ class MisionesCredentialsForm(forms.ModelForm):
             self.fields['misiones_password_plain'].required = False
         else:
             self.fields['misiones_password_plain'].required = True
-
-class MisionesRecordForm(forms.ModelForm):
-    class Meta:
-        model = MisionesRecord
-        fields = ['tenant_name', 'tenant_email', 'rental_period_start', 'rental_period_end', 'amount', 'status', 'attachment', 'notes']
-
-    tenant_name = forms.CharField(max_length=100, required=True, label="Nombre del Inquilino")
-    tenant_email = forms.EmailField(required=False, label="Correo del Inquilino")
-    rental_period_start = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), required=True, label="Fecha Inicio Alquiler")
-    rental_period_end = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), required=True, label="Fecha Fin Alquiler")
-    amount = forms.DecimalField(max_digits=10, decimal_places=2, required=True, label="Monto")
-    status = forms.ChoiceField(choices=MisionesRecord.STATUS_CHOICES, required=True, label="Estado")
-    attachment = forms.FileField(required=False, label="Adjunto")
-    notes = forms.CharField(widget=forms.Textarea(), required=False, label="Notas")

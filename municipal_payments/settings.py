@@ -129,6 +129,7 @@ STATIC_URL = "static/"
 # Directorios adicionales donde Django buscará archivos estáticos
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+    BASE_DIR,  # Para servir archivos en la raíz
 ]
 
 # Default primary key field type

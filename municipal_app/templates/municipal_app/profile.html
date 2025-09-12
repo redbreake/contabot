@@ -44,6 +44,21 @@
         {% endif %}
       </a></p>
 
+      <h3 class="mt-4">Credenciales de Renta Misiones</h3>
+      {% if has_misiones_credentials == True %}
+        <p>Usuario de Renta Misiones: <strong>{{ misiones_username }}</strong></p>
+        <p>Tus credenciales de Renta Misiones están cargadas.</p>
+      {% else %}
+        <p>Aún no has ingresado tus credenciales de Renta Misiones.</p>
+      {% endif %}
+      <p><a href="{% url 'misiones_credentials' %}" class="btn btn-info">
+        {% if has_misiones_credentials %}
+          Modificar Credenciales de Renta Misiones
+        {% else %}
+          Ingresar Credenciales de Renta Misiones
+        {% endif %}
+      </a></p>
+
     </div>
   </div>
 {% endblock %}

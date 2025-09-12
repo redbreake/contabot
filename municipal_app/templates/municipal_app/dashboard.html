@@ -15,6 +15,12 @@
         </div>
       {% endif %}
 
+      {% if not has_misiones_credentials %}
+        <div class="alert alert-danger" role="alert">
+          Aún no has ingresado tus credenciales de Renta Misiones. Por favor, <a href="{% url 'misiones_credentials' %}" class="alert-link">ingrésalas aquí</a> para utilizar todas las funcionalidades.
+        </div>
+      {% endif %}
+
       <div class="list-group">
        <div class="d-grid gap-2 mb-4"> {# d-grid para botón de ancho completo, gap-2 para espacio, mb-4 para margen inferior #}
          <a href="{% url 'enter_billing' %}" class="btn btn-primary btn-lg">
@@ -34,6 +40,12 @@
        </a>
        <a href="{% url 'profile' %}" class="list-group-item list-group-item-action">
          Ver y Editar Perfil
+       </a>
+       <a href="{% url 'municipal_credentials' %}" class="list-group-item list-group-item-action">
+         Gestionar Credenciales de la Municipalidad
+       </a>
+       <a href="{% url 'misiones_credentials' %}" class="list-group-item list-group-item-action">
+         Gestionar Credenciales de Renta Misiones
        </a>
      </div>
 
