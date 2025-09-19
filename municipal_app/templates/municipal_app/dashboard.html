@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Contabot{% endblock %}
 
 {% block content %}
   <div class="row justify-content-center">
@@ -28,15 +28,12 @@
          </a>
        </div>
        <div class="d-grid gap-2 mb-4">
-         <a href="{% url 'enter_misiones' %}" class="btn btn-success btn-lg">
+         <a href="{% url 'enter_misiones' %}" class="btn btn-danger btn-lg">
            Ingresar Renta Misiones
          </a>
        </div>
        <a href="{% url 'history' %}" class="list-group-item list-group-item-action">
-         Ver Historial de Ejecuciones
-       </a>
-       <a href="{% url 'misiones_history' %}" class="list-group-item list-group-item-action">
-         Historial Renta Misiones
+         <i class="bi bi-clock-history"></i> Ver Historial de Ejecuciones
        </a>
        <a href="{% url 'profile' %}" class="list-group-item list-group-item-action">
          Ver y Editar Perfil

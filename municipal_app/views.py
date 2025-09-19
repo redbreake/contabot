@@ -7,7 +7,7 @@ from cryptography.fernet import Fernet
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -17,8 +17,9 @@ from django.conf import settings
 # Print sys.path for debugging
 print("sys.path in views.py:", sys.path)
 
-from .forms import MunicipalCredentialsForm, UserProfileForm, MisionesCredentialsForm
+from .forms import MunicipalCredentialsForm, UserProfileForm, MisionesCredentialsForm, FileUploadForm
 from .models import MunicipalCredentials, ExecutionHistory, MisionesCredentials, MisionesExecutionHistory
+from .utils import extract_total_from_file
 from munibot import run_munibot
 try:
     from rentabot import run_rentabot
@@ -111,8 +112,25 @@ class EnterBillingView(LoginRequiredMixin, generic.TemplateView):
         monto = request.POST.get('monto')
         user = request.user
 
+        # Manejar carga de archivo
+        uploaded_file = request.FILES.get('file')
+        if uploaded_file:
+            try:
+                extracted_monto = extract_total_from_file(uploaded_file)
+                monto = str(extracted_monto)
+                messages.info(request, f'Monto extraído del archivo: {monto}')
+                logger.debug(f"EnterBillingView: Monto extraído del archivo: {monto}")
+            except ValueError as e:
+                messages.error(request, f'Error procesando archivo: {e}')
+                logger.error(f"EnterBillingView: Error procesando archivo: {e}")
+                return redirect('enter_billing')
+        elif not monto:
+            messages.error(request, 'Debes ingresar un monto manualmente o subir un archivo.')
+            logger.error(f"EnterBillingView: No se proporcionó monto ni archivo")
+            return redirect('enter_billing')
+
         logger.debug(f"EnterBillingView: POST request para usuario {user.username}")
-        logger.debug(f"EnterBillingView: Monto recibido: {monto}")
+        logger.debug(f"EnterBillingView: Monto final: {monto}")
 
         execution_status = 'Failed'
         execution_output = None
@@ -308,8 +326,25 @@ class EnterMisionesBillingView(LoginRequiredMixin, generic.TemplateView):
         monto = request.POST.get('monto')
         user = self.request.user
 
+        # Manejar carga de archivo
+        uploaded_file = request.FILES.get('file')
+        if uploaded_file:
+            try:
+                extracted_monto = extract_total_from_file(uploaded_file)
+                monto = str(extracted_monto)
+                messages.info(request, f'Monto extraído del archivo: {monto}')
+                logger.debug(f"EnterMisionesBillingView: Monto extraído del archivo: {monto}")
+            except ValueError as e:
+                messages.error(request, f'Error procesando archivo: {e}')
+                logger.error(f"EnterMisionesBillingView: Error procesando archivo: {e}")
+                return redirect('enter_missions')
+        elif not monto:
+            messages.error(request, 'Debes ingresar un monto manualmente o subir un archivo.')
+            logger.error(f"EnterMisionesBillingView: No se proporcionó monto ni archivo")
+            return redirect('enter_missions')
+
         logger.debug(f"EnterMisionesBillingView: POST request para usuario {user.username}")
-        logger.debug(f"EnterMisionesBillingView: Monto recibido: {monto}")
+        logger.debug(f"EnterMisionesBillingView: Monto final: {monto}")
 
         execution_status = 'Failed'
         execution_output = None
@@ -401,6 +436,75 @@ class MisionesHistoryView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
+
+class CombinedHistoryView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'municipal_app/combined_history.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        history_type = self.request.GET.get('type', 'municipal')  # Default to municipal
+
+        if history_type == 'municipal':
+            context['history_list'] = ExecutionHistory.objects.filter(user=user).order_by('-execution_time')
+            context['history_title'] = 'Historial de Ejecuciones Municipales'
+        elif history_type == 'misiones':
+            context['history_list'] = MisionesExecutionHistory.objects.filter(user=user).order_by('-execution_time')
+            context['history_title'] = 'Historial de Ejecuciones Renta Misiones'
+        else:
+            context['history_list'] = ExecutionHistory.objects.filter(user=user).order_by('-execution_time')
+            context['history_title'] = 'Historial de Ejecuciones Municipales'
+
+        context['current_type'] = history_type
+        return context
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+
+        # Verificar si es una eliminación masiva
+        if request.POST.get('delete_all'):
+            history_type = request.POST.get('current_type', 'municipal')
+            try:
+                if history_type == 'municipal':
+                    count = ExecutionHistory.objects.filter(user=user).delete()[0]
+                    messages.success(request, f'Se eliminaron {count} registros municipales exitosamente.')
+                elif history_type == 'misiones':
+                    count = MisionesExecutionHistory.objects.filter(user=user).delete()[0]
+                    messages.success(request, f'Se eliminaron {count} registros de Renta Misiones exitosamente.')
+                else:
+                    messages.error(request, 'Tipo de historial no válido.')
+            except Exception as e:
+                messages.error(request, f'Error al eliminar los registros: {str(e)}')
+
+            return redirect(f'{reverse("history")}?type={history_type}')
+
+        # Eliminación individual
+        record_id = request.POST.get('record_id')
+        record_type = request.POST.get('record_type')
+
+        if not record_id or not record_type:
+            messages.error(request, 'ID de registro o tipo no especificado.')
+            return redirect(request.META.get('HTTP_REFERER', 'history'))
+
+        try:
+            if record_type == 'municipal':
+                record = ExecutionHistory.objects.get(id=record_id, user=user)
+                record.delete()
+                messages.success(request, 'Registro municipal eliminado exitosamente.')
+            elif record_type == 'misiones':
+                record = MisionesExecutionHistory.objects.get(id=record_id, user=user)
+                record.delete()
+                messages.success(request, 'Registro de Renta Misiones eliminado exitosamente.')
+            else:
+                messages.error(request, 'Tipo de registro no válido.')
+        except (ExecutionHistory.DoesNotExist, MisionesExecutionHistory.DoesNotExist):
+            messages.error(request, 'Registro no encontrado o no tienes permisos para eliminarlo.')
+        except Exception as e:
+            messages.error(request, f'Error al eliminar el registro: {str(e)}')
+
+        # Redirigir manteniendo el tipo de historial actual
+        history_type = request.POST.get('current_type', 'municipal')
+        return redirect(f'{reverse("history")}?type={history_type}')
 
 class DashboardView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'municipal_app/dashboard.html'

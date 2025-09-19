@@ -9,14 +9,19 @@
     <div class="col-md-6">
       <img src="{% static 'renta.png' %}" class="mb-3 d-block mx-auto" style="height: 60px; width: 60px; object-fit: cover;" alt="Logo Renta Misiones">
       <h2 class="mb-4">Ingresar Monto Imponible Mensual de Renta Misiones</h2>
-      <form method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-          <label for="monto" class="form-label">Monto Imponible:</label>
-          <input type="number" class="form-control" id="monto" name="monto" step="0.01" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Procesar Facturación de Renta Misiones</button>
-      </form>
+       <form method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+         <div class="mb-3">
+           <label for="monto" class="form-label">Monto Imponible:</label>
+           <input type="number" class="form-control" id="monto" name="monto" step="0.01" placeholder="Ingresa manualmente o sube un archivo" min="0">
+         </div>
+         <div class="mb-3">
+           <label for="file" class="form-label">O sube un archivo (Excel o PDF):</label>
+           <input type="file" class="form-control" id="file" name="file" accept=".xlsx,.xls,.pdf">
+           <div class="form-text">El sistema extraerá automáticamente el monto total del archivo.</div>
+         </div>
+         <button type="submit" class="btn btn-primary">Procesar Facturación de Renta Misiones</button>
+       </form>
     </div>
   </div>
 {% endblock %}

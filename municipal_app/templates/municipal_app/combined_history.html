@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+
+{% block title %}Historial - Contabot{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <!-- Switch elegante -->
+      <div class="d-flex justify-content-center mb-5">
+        <div class="card shadow-sm" style="border-radius: 15px; border: none;">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-center">
+              <div class="position-relative">
+                <button class="btn modern-toggle rounded-pill px-4 py-3 shadow-lg" id="historyToggle"
+                        style="width: 14rem; height: 3.5rem; border: none;">
+                  <span class="position-absolute top-50 start-0 translate-middle-y ms-2 rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center"
+                        id="toggleCircle" style="width: 2.5rem; height: 2.5rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); left: 0.5rem;">
+                    <span id="toggleIcon" class="fs-5">🏛️</span>
+                  </span>
+                  <span id="toggleText" class="fw-bold fs-5 ms-4 text-white" style="transition: all 0.3s ease;">Municipal</span>
+                </button>
+              </div>
+              <input type="hidden" id="currentType" value="{{ current_type }}">
+            </div>
+            <div class="text-center mt-3">
+              <small class="text-muted" id="toggleHint">
+                {% if current_type == 'municipal' %}
+                  Cambiar a <strong class="text-danger">Renta Misiones</strong>
+                {% else %}
+                  Cambiar a <strong class="text-primary">Municipal</strong>
+                {% endif %}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        /* Estilos modernos para el toggle */
+        .modern-toggle {
+          position: relative;
+          overflow: hidden;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+          cursor: pointer;
+        }
+
+        .modern-toggle:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+        }
+
+        .modern-toggle:active {
+          transform: translateY(0);
+          box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Estado Municipal (azul) */
+        .modern-toggle.municipal {
+          background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+        }
+
+        .modern-toggle.municipal:hover {
+          box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Estado Renta Misiones (rojo) */
+        .modern-toggle.misiones {
+          background: linear-gradient(135deg, #dc3545 0%, #b02a37 100%);
+        }
+
+        .modern-toggle.misiones:hover {
+          box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+        }
+
+        /* Círculo deslizante */
+        #toggleCircle {
+          z-index: 1;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Texto del toggle */
+        #toggleText {
+          position: relative;
+          z-index: 2;
+          transition: all 0.3s ease;
+        }
+
+        #toggleIcon {
+          transition: all 0.3s ease;
+        }
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const toggleButton = document.getElementById('historyToggle');
+          const toggleCircle = document.getElementById('toggleCircle');
+          const toggleText = document.getElementById('toggleText');
+          const toggleIcon = document.getElementById('toggleIcon');
+          const toggleHint = document.getElementById('toggleHint');
+
+          let currentType = document.getElementById('currentType').value;
+          let isMunicipal = currentType === 'municipal';
+
+          function updateToggle() {
+            const buttonWidth = toggleButton.offsetWidth;
+            const circleWidth = toggleCircle.offsetWidth;
+
+            if (isMunicipal) {
+              // Estado Municipal
+              toggleButton.classList.remove('misiones');
+              toggleButton.classList.add('municipal');
+              toggleCircle.style.left = '0.5rem';
+              toggleText.textContent = 'Municipal';
+              toggleText.style.color = '#ffffff';
+              toggleIcon.textContent = '🏛️';
+              toggleHint.innerHTML = 'Cambiar a <strong style="color: #dc3545;">Renta Misiones</strong>';
+            } else {
+              // Estado Renta Misiones
+              toggleButton.classList.remove('municipal');
+              toggleButton.classList.add('misiones');
+              toggleCircle.style.left = (buttonWidth - circleWidth - 8) + 'px'; // 8px de margen
+              toggleText.textContent = 'Renta Misiones';
+              toggleText.style.color = '#ffffff';
+              toggleIcon.textContent = '📑';
+              toggleHint.innerHTML = 'Cambiar a <strong style="color: #007bff;">Municipal</strong>';
+            }
+          }
+
+          // Inicializar estado
+          updateToggle();
+
+          toggleButton.addEventListener('click', function() {
+            isMunicipal = !isMunicipal;
+
+            // Agregar animación de rebote
+            toggleCircle.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+              toggleCircle.style.transform = 'scale(1)';
+              updateToggle();
+            }, 100);
+
+            // Cambiar la URL para actualizar el historial
+            const newType = isMunicipal ? 'municipal' : 'misiones';
+            const url = new URL(window.location);
+            url.searchParams.set('type', newType);
+            setTimeout(() => {
+              window.location.href = url.toString();
+            }, 400); // Esperar a que termine la animación
+          });
+        });
+      </script>
+
+      {% if history_list %}
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0 text-dark">{{ history_title }}</h5>
+          {% if history_list %}
+            <form method="post" class="d-inline" onsubmit="return confirm('¿Estás seguro de que quieres eliminar TODOS los registros? Esta acción no se puede deshacer.');">
+              {% csrf_token %}
+              <input type="hidden" name="delete_all" value="true">
+              <input type="hidden" name="current_type" value="{{ current_type }}">
+              <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar todos los registros">
+                <i class="bi bi-trash-fill"></i> Eliminar Todo
+              </button>
+            </form>
+          {% endif %}
+        </div>
+
+        <table class="table table-striped table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Fecha y Hora</th>
+              <th scope="col">Monto Imponible</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Salida</th>
+              <th scope="col">Error</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for execution in history_list %}
+              <tr>
+                <td>{{ execution.execution_time|date:"Y-m-d H:i:s" }}</td>
+                <td>${{ execution.amount|default:"-" }}</td>
+                <td>
+                  {% if execution.status == 'Success' %}
+                    <span class="badge bg-success">Éxito</span>
+                  {% else %}
+                    <span class="badge bg-danger">Falló</span>
+                  {% endif %}
+                </td>
+                <td><pre class="mb-0">{{ execution.output|default:"-"|truncatechars:100 }}</pre></td>
+                <td><pre class="mb-0">{{ execution.error|default:"-"|truncatechars:100 }}</pre></td>
+                <td>
+                  <form method="post" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este registro? Esta acción no se puede deshacer.');">
+                    {% csrf_token %}
+                    <input type="hidden" name="record_id" value="{{ execution.id }}">
+                    <input type="hidden" name="record_type" value="{{ current_type }}">
+                    <input type="hidden" name="current_type" value="{{ current_type }}">
+                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar registro">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <div class="alert alert-info" role="alert">
+          <i class="bi bi-info-circle"></i> Aún no hay registros en el historial de ejecuciones.
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

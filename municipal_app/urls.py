@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
-from .views import RegisterView, MunicipalCredentialsView, EnterBillingView, ProfileView, ExecutionHistoryView, DashboardView, MisionesCredentialsView, EnterMisionesBillingView, MisionesHistoryView, AdminDashboardView
+from .views import RegisterView, MunicipalCredentialsView, EnterBillingView, ProfileView, ExecutionHistoryView, DashboardView, MisionesCredentialsView, EnterMisionesBillingView, MisionesHistoryView, AdminDashboardView, CombinedHistoryView
 
 urlpatterns = [
     # URL raíz que redirige a login
@@ -21,8 +21,8 @@ urlpatterns = [
     # URL para perfil de usuario
     path('profile/', ProfileView.as_view(), name='profile'),
 
-    # URL para historial de ejecuciones
-    path('history/', ExecutionHistoryView.as_view(), name='history'),
+    # URL para historial de ejecuciones combinado
+    path('history/', CombinedHistoryView.as_view(), name='history'),
 
     # URL para el dashboard
     path('dashboard/', DashboardView.as_view(), name='dashboard'),

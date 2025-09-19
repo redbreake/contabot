@@ -3,6 +3,14 @@ from django.contrib.auth.forms import UserChangeForm # Importar UserChangeForm
 from django.contrib.auth.models import User # Importar el modelo User
 from .models import MunicipalCredentials, MisionesCredentials
 
+class FileUploadForm(forms.Form):
+    file = forms.FileField(
+        label='Cargar archivo',
+        help_text='Selecciona un archivo Excel (.xlsx, .xls) o PDF (.pdf)',
+        widget=forms.ClearableFileInput(attrs={'accept': '.xlsx,.xls,.pdf'}),
+        required=False
+    )
+
 class MunicipalCredentialsForm(forms.ModelForm):
     class Meta:
         model = MunicipalCredentials
