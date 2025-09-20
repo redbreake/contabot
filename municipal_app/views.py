@@ -570,7 +570,7 @@ class AdminDashboardView(LoginRequiredMixin, generic.TemplateView):
         context['active_users_count'] = User.objects.filter(last_login__gte=active_threshold).count()
 
         # Gráfico de ejecuciones por mes (últimos 6 meses)
-        from django.db.models import Count
+        from django.db.models import Count, Q
         from django.db.models.functions import TruncMonth
 
         six_months_ago = timezone.now() - timedelta(days=180)
@@ -607,5 +607,41 @@ class AdminDashboardView(LoginRequiredMixin, generic.TemplateView):
         # Logins recientes
         recent_logins = User.objects.exclude(last_login__isnull=True).order_by('-last_login')[:5]
         context['recent_logins'] = recent_logins
+
+        # Últimos errores de ejecución (últimos 10)
+        recent_errors = []
+
+        # Errores municipales
+        municipal_errors = ExecutionHistory.objects.filter(
+            ~Q(error__isnull=True),
+            ~Q(error='')
+        ).order_by('-execution_time')[:5]
+
+        for error in municipal_errors:
+            recent_errors.append({
+                'type': 'Municipal',
+                'user': error.user.username,
+                'time': error.execution_time,
+                'error': error.error[:100] + '...' if len(error.error) > 100 else error.error,
+                'amount': error.amount
+            })
+
+        # Errores de Renta Misiones
+        misiones_errors = MisionesExecutionHistory.objects.filter(
+            ~Q(error__isnull=True),
+            ~Q(error='')
+        ).order_by('-execution_time')[:5]
+
+        for error in misiones_errors:
+            recent_errors.append({
+                'type': 'Renta Misiones',
+                'user': error.user.username,
+                'time': error.execution_time,
+                'error': error.error[:100] + '...' if len(error.error) > 100 else error.error,
+                'amount': error.amount
+            })
+
+        # Ordenar por tiempo descendente y tomar los 10 más recientes
+        context['recent_errors'] = sorted(recent_errors, key=lambda x: x['time'], reverse=True)[:10]
 
         return context

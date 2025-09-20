@@ -39,6 +39,34 @@
             <div class="progress mt-2">
               <div class="progress-bar bg-success" role="progressbar" style="width: {{ success_rate }}%;" aria-valuenow="{{ success_rate }}" aria-valuemin="0" aria-valuemax="100">{{ success_rate }}%</div>
             </div>
+
+            <!-- Dropdown de errores recientes -->
+            <div class="dropdown mt-3">
+              <button class="btn btn-outline-warning btn-sm dropdown-toggle" type="button" id="errorsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-exclamation-triangle"></i> Últimos Errores
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="errorsDropdown" style="max-width: 300px;">
+                {% if recent_errors %}
+                  {% for error in recent_errors %}
+                    <li class="dropdown-item">
+                      <div class="small">
+                        <strong class="{% if error.type == 'Municipal' %}text-primary{% else %}text-danger{% endif %}">{{ error.type }}</strong><br>
+                        <span class="text-muted">{{ error.user }} - {{ error.time|date:"d/m H:i" }}</span><br>
+                        <span class="text-truncate d-block" title="{{ error.error }}">{{ error.error }}</span>
+                        {% if error.amount %}
+                          <small class="text-muted">Monto: ${{ error.amount }}</small>
+                        {% endif %}
+                      </div>
+                    </li>
+                    {% if not forloop.last %}<li><hr class="dropdown-divider"></li>{% endif %}
+                  {% endfor %}
+                {% else %}
+                  <li class="dropdown-item text-center text-muted">
+                    <small>No hay errores recientes</small>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
