@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Chatbot{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h2 class="mb-4">Chatbot de Consultas</h2>
+    <p class="text-muted">Haz preguntas sobre normativas municipales y rentas. El chatbot te ayudará con información relevante.</p>
+
+    <div class="card">
+      <div class="card-body">
+        <div id="chat-messages" class="mb-3" style="height: 400px; overflow-y: auto; border: 1px solid #dee2e6; padding: 15px; border-radius: 5px;">
+          <!-- Chat messages will appear here -->
+        </div>
+
+        <form id="chat-form">
+          {% csrf_token %}
+          <div class="input-group">
+            <input type="text" class="form-control" id="pregunta" name="pregunta" placeholder="Escribe tu pregunta aquí..." required>
+            <button type="submit" class="btn btn-primary" id="submit-btn">
+              <i class="bi bi-send"></i> Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('chat-form');
+    const messages = document.getElementById('chat-messages');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const pregunta = document.getElementById('pregunta').value.trim();
+
+        if (!pregunta) return;
+
+        // Add user message
+        addMessage('user', pregunta);
+
+        // Disable form while processing
+        document.getElementById('pregunta').disabled = true;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Procesando...';
+
+        // Send AJAX request
+        fetch('/api/chatbot/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify({pregunta: pregunta})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.respuesta) {
+                addMessage('bot', data.respuesta);
+            } else if (data.error) {
+                addMessage('bot', 'Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            addMessage('bot', 'Error de conexión. Inténtalo de nuevo.');
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            // Re-enable form
+            document.getElementById('pregunta').value = '';
+            document.getElementById('pregunta').disabled = false;
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="bi bi-send"></i> Enviar';
+        });
+    });
+
+    function addMessage(sender, text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+        messageDiv.innerHTML = `
+            <div class="d-flex ${sender === 'user' ? 'justify-content-end' : 'justify-content-start'} mb-2">
+                <div class="alert ${sender === 'user' ? 'alert-primary' : 'alert-secondary'} ${sender === 'user' ? 'text-end' : ''}" style="max-width: 70%;">
+                    <strong>${sender === 'user' ? 'Tú:' : 'Chatbot:'}</strong><br>
+                    ${text}
+                </div>
+            </div>
+        `;
+        messages.appendChild(messageDiv);
+        messages.scrollTop = messages.scrollHeight;
+    }
+});
+</script>
+{% endblock %}

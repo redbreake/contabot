@@ -645,3 +645,35 @@ class AdminDashboardView(LoginRequiredMixin, generic.TemplateView):
         context['recent_errors'] = sorted(recent_errors, key=lambda x: x['time'], reverse=True)[:10]
 
         return context
+
+class ChatbotView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'municipal_app/chatbot.html'
+
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .chatbot_rag import generar_respuesta_rag
+
+@csrf_exempt
+def chatbot_api(request):
+    """
+    Vista de API para interactuar con el chatbot RAG.
+    """
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            pregunta = data.get('pregunta')
+
+            if not pregunta:
+                return JsonResponse({'error': 'La pregunta no puede estar vacía.'}, status=400)
+
+            # Llamar a la función principal del chatbot
+            respuesta = generar_respuesta_rag(pregunta)
+
+            return JsonResponse({'respuesta': respuesta})
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Cuerpo de la petición JSON inválido.'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': f'Error interno del servidor: {str(e)}'}, status=500)
+
+    return JsonResponse({'error': 'Solo se permite el método POST.'}, status=405)

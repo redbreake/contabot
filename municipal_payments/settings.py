@@ -147,6 +147,11 @@ LOGIN_URL = '/login/' # Asegurarse de que Django use tu URL de login
 # Puedes generar una con: from cryptography.fernet import Fernet; Fernet.generate_key().decode()
 FERNET_KEY = os.getenv('FERNET_KEY')
 
+# --- Configuración para Gemini API ---
+# ¡IMPORTANTE! Carga tu clave desde una variable de entorno en producción.
+# Por ahora, puedes ponerla aquí para desarrollo.
+GEMINI_API_KEY = "AIzaSyDr0kf9YqCjjJXQmSD35g8nJfLCm0h81J8"
+
 # Configuración de Logging para depuración
 LOGGING = {
     'version': 1,

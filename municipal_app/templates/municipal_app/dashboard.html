@@ -44,8 +44,87 @@
        <a href="{% url 'misiones_credentials' %}" class="list-group-item list-group-item-action">
          Gestionar Credenciales de Renta Misiones
        </a>
+       <a href="{% url 'chatbot' %}" class="list-group-item list-group-item-action">
+         <i class="bi bi-robot"></i> Consultar Chatbot
+       </a>
      </div>
 
-    </div>
-  </div>
+     <div class="mt-4">
+       <h4>Consulta Rápida al Chatbot</h4>
+       <p class="text-muted">Haz una pregunta rápida sobre normativas o trámites.</p>
+       <div class="card">
+         <div class="card-body">
+           <form id="quick-chat-form">
+             {% csrf_token %}
+             <div class="input-group">
+               <input type="text" class="form-control" id="quick-pregunta" name="pregunta" placeholder="Escribe tu pregunta..." required>
+               <button type="submit" class="btn btn-outline-primary" id="quick-submit-btn">
+                 <i class="bi bi-search"></i>
+               </button>
+             </div>
+           </form>
+           <div id="quick-response" class="mt-2" style="display: none;">
+             <div class="alert alert-info">
+               <strong>Respuesta:</strong> <span id="response-text"></span>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+   </div>
+ </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+   const quickForm = document.getElementById('quick-chat-form');
+   const responseDiv = document.getElementById('quick-response');
+   const responseText = document.getElementById('response-text');
+   const submitBtn = document.getElementById('quick-submit-btn');
+
+   quickForm.addEventListener('submit', function(e) {
+       e.preventDefault();
+       const pregunta = document.getElementById('quick-pregunta').value.trim();
+
+       if (!pregunta) return;
+
+       // Disable form while processing
+       document.getElementById('quick-pregunta').disabled = true;
+       submitBtn.disabled = true;
+       submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i>';
+
+       // Send AJAX request
+       fetch('/api/chatbot/', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json',
+               'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+           },
+           body: JSON.stringify({pregunta: pregunta})
+       })
+       .then(response => response.json())
+       .then(data => {
+           if (data.respuesta) {
+               responseText.textContent = data.respuesta;
+               responseDiv.style.display = 'block';
+           } else if (data.error) {
+               responseText.textContent = 'Error: ' + data.error;
+               responseDiv.style.display = 'block';
+           }
+       })
+       .catch(error => {
+           responseText.textContent = 'Error de conexión. Inténtalo de nuevo.';
+           responseDiv.style.display = 'block';
+           console.error('Error:', error);
+       })
+       .finally(() => {
+           // Re-enable form
+           document.getElementById('quick-pregunta').value = '';
+           document.getElementById('quick-pregunta').disabled = false;
+           submitBtn.disabled = false;
+           submitBtn.innerHTML = '<i class="bi bi-search"></i>';
+       });
+   });
+});
+</script>
 {% endblock %}
