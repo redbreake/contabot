@@ -60,6 +60,16 @@ La aplicación estará disponible en `http://127.0.0.1:8000/`.
 - Asegúrate de tener el script `munibot.py` en la raíz del proyecto.
 - Configura las credenciales de la municipalidad a través de la interfaz de usuario después de iniciar sesión.
 
+## Uso de Scripts
+
+### `rentabot.py`
+
+Este script se encarga de procesar las facturas de rentas municipales. Se ejecuta automáticamente cuando se ingresan los datos de facturación correspondientes a través de la interfaz web.
+
+### `munibot.py` y `munibot2py`
+
+Scripts utilizados para la interacción con sistemas municipales y procesamiento de datos relacionados con los pagos. Ambos deben estar ubicados en la raíz del proyecto para su correcto funcionamiento.
+
 ## Contribución
 
 Si deseas contribuir a este proyecto, por favor, sigue los siguientes pasos:
