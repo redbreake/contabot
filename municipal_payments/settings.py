@@ -150,7 +150,7 @@ FERNET_KEY = os.getenv('FERNET_KEY')
 # --- Configuración para Gemini API ---
 # ¡IMPORTANTE! Carga tu clave desde una variable de entorno en producción.
 # Por ahora, puedes ponerla aquí para desarrollo.
-GEMINI_API_KEY = "AIzaSyDr0kf9YqCjjJXQmSD35g8nJfLCm0h81J8"
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 # Configuración de Logging para depuración
 LOGGING = {

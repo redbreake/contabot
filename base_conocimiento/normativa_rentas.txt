@@ -6,3 +6,491 @@ Están exentos del pago de este impuesto las actividades realizadas por el Estad
 
 Artículo 3: Alícuotas.
 La alícuota general del impuesto es del 3%. Se establecen alícuotas diferenciales para actividades específicas, como la industria (1.5%) y los servicios financieros (5%). El poder ejecutivo municipal puede modificar estas alícuotas con la aprobación del Concejo Deliberante.
+### codigo_fiscal_misiones.txt
+ARTÍCULO 1.- Las obligaciones fiscales que establezca la Provincia de Misiones, sean impuestos, tasas o contribuciones, se regirán por las disposiciones de este Código o leyes fiscales especiales.
+
+ARTÍCULO 2.- Son impuestos las prestaciones pecuniarias que, por disposición de este Código o de leyes especiales, estén obligadas a pagar a la Provincia las personas que realicen actos y operaciones o se encuentren en situaciones que la ley considera como hechos imponibles. Es hecho imponible todo hecho, acto, operación o situación de la vida económica de los que este Código o leyes fiscales especiales hagan depender el nacimiento de la obligación impositiva.
+
+ARTÍCULO 3.- Son tasas las prestaciones pecuniarias que, por disposición de este Código o de leyes especiales, estén obligadas a pagar como retribución a la Provincia las personas a que ésta presta servicios administrativos o judiciales.
+
+ARTÍCULO 4.- Son contribuciones las prestaciones pecuniarias que por disposición del presente Código o de leyes especiales, estén obligadas a pagar a la Provincia las personas que obtengan beneficios o mejoras en los bienes de su propiedad o poseídos a título de dueño por obras o servicios públicos generales.
+
+ARTÍCULO 5.- Las normas tributarias son obligatorias a partir del octavo día hábil posterior al de su publicación en el Boletín Oficial, salvo que ellas mismas dispongan otra fecha de vigor.
+
+ARTÍCULO 6.- Son admisibles todos los métodos para la interpretación de las disposiciones de este Código y demás leyes fiscales, pero en ningún caso se establecerán impuestos, tasas o contribuciones, ni se considerará a ninguna persona como contribuyente o responsable del pago de una obligación fiscal, sino en virtud de este Código u otra ley.
+
+ARTÍCULO 7.- Para los casos que no puedan ser resueltos por las disposiciones pertinentes de este Código o de una ley fiscal especial, se recurrirá a las disposiciones de este Código u otra ley fiscal relativa a materia análoga, salvo, sin embargo, lo dispuesto en el artículo anterior. En defecto de normas establecidas para materia análoga se recurrirá a los principios generales del derecho, teniendo en cuenta la naturaleza y finalidad de las normas fiscales. Cuando los términos o conceptos contenidos en las disposiciones del presente Código o demás leyes fiscales no resulten aclarados en su significación y alcance por los métodos de interpretación indicados en el párrafo anterior, se atenderá al significado y alcance que los mismos tengan en las normas del derecho privado.
+
+ARTÍCULO 8.- Serán de aplicación supletoria respecto al procedimiento para los casos no previstos en este Código, las disposiciones de la ley de trámite administrativo, los Códigos de Procedimiento de la Provincia en lo Contencioso Administrativo, en lo Civil y Comercial y en lo Penal.
+
+ARTÍCULO 9.- Para determinar la verdadera naturaleza de los hechos imponibles, se atenderá a los actos o situaciones efectivamente realizadas, con prescindencia de las formas o de los contratos del derecho privado en que se exterioricen. La elección de actos o contratos diferentes de los que normalmente se utilizan para realizar las operaciones económicas que el presente Código u otras leyes especiales consideren como hechos imponibles, es irrelevante a los efectos de la aplicación del impuesto. A este efecto se tendrá en cuenta el conjunto de circunstancias concretas que dan origen al hecho imponible, actividades industriales o profesionales o de las relaciones civiles que a él se refieren, la contabilidad correcta y ordenada de los contribuyentes y los usos y costumbres de la vida económica y social.
+
+ARTÍCULO 10.- Todas las funciones referentes a la recaudación, fiscalización, determinación, aplicación de sanciones, devolución de los impuestos, tasas y contribuciones establecidos por este Código y demás leyes fiscales, corresponderán a la Dirección General de Rentas. La Dirección General de Rentas actuará como entidad autárquica en el orden administrativo, financiero, presupuestario y operativo en lo que se refiere a su organización y funcionamiento, según las normas que al efecto se prevén en la presente ley. En lo que atañe a la aplicación, percepción y fiscalización de los tributos a su cargo, se desenvolverá bajo la superintendencia general que ejercerá sobre la misma el Ministerio de Hacienda, Finanzas, Obras y Servicios Públicos a través de su estructura orgánica. A tales fines, su patrimonio estará constituido por todos los bienes que le asigne el Estado Provincial y por aquellos que le sean transmitidos o adquiera por cualquier causa jurídica. El Poder Ejecutivo Provincial queda facultado para transferir sin cargo los inmuebles actualmente en uso por la Dirección General de Rentas, y que son de propiedad del Estado Provincial. La fiscalización de la Dirección General de Rentas será realizada por el Tribunal de Cuentas y por la Contaduría General de la Provincia. La Dirección General de Rentas será denominada en este Código simplemente: “La Dirección”.
+
+ARTÍCULO 11.- Los recursos de la Dirección provienen de: a) los importes que surjan de aplicar el trece por ciento (13 %) de lo recaudado en concepto de tributos provinciales, que se presupuestan anualmente para su inclusión en el Presupuesto de la Administración Pública Provincial de acuerdo a lo previsto en el inciso h) del artículo 18 del presente código; b) las sumas provenientes de las prestaciones a terceros y ventas de publicaciones, formularios e instrucciones que realiza el organismo; c) los importes que provengan de la venta de bienes muebles o inmuebles, registrables o no; d) todo otro ingreso no contemplado expresamente, pero cuya percepción no sea incompatible con las facultades otorgadas al Organismo. En caso de que los recursos previstos en el inciso a) sean insuficientes, el Poder Ejecutivo efectúa las adecuaciones y refuerzos que resultan necesarios para financiar el funcionamiento de la Dirección. La Dirección tiene a su cargo la administración y manejo de los fondos destinados a atender su presupuesto, con amplias facultades para asignar y redistribuir los fondos, quedando facultada para deducir el importe de los mismos del monto de las recaudaciones a su cargo. Los bienes y cuentas de la Dirección son inembargables. El agente financiero de la Provincia deposita el importe establecido en el inciso a), a disposición de la Dirección General de Rentas, informando mensualmente a la Tesorería General de la Provincia los importes transferidos. Se crea la cuenta: Dirección General de Rentas - Cuenta Operativa, la que se forma con el trece por ciento (13 %) de la recaudación neta total de los gravámenes provinciales. Los fondos son aplicados por la Dirección para cubrir gastos operativos y de funcionamiento. En caso de existir excedentes de recursos no utilizados, ni comprometidos, los mismos son transferidos a la Tesorería General de la Provincia según lo determina la reglamentación. A los efectos de esta norma debe entenderse por recaudación neta total las sumas que resultan de deducir de los ingresos totales, las devoluciones, repeticiones, reintegros y reembolsos dispuestos por las leyes correspondientes a tributos que recauda la Dirección, incluyendo a todas las modalidades de cancelación de las obligaciones, vigentes o a crearse, que aplican los contribuyentes y responsables.
+
+ARTÍCULO 12.- La Dirección estará a cargo de un Director General cuyas funciones, atribuciones y deberes se establecen en el presente Código, leyes fiscales y decretos reglamentarios. Condiciones para ser Director General Para ser Director General se requiere: ser argentino nativo, con cinco años de residencia en la Provincia, poseer título de Contador Público Nacional o Doctor en Ciencias Económicas expedido por Universidad Argentina debiendo acreditar además cinco años en el ejercicio de la profesión o desempeño de una función pública. Representación de la Dirección General El Director General o quien legalmente lo sustituya representará a la Dirección frente a los Poderes Públicos, contribuyentes, responsables y terceros. Delegación de funciones y facultades del Director General El Director General podrá delegar sus funciones en funcionarios dependientes, de manera general o especial; pero no son delegables las atribuciones de: a) reglamentación de normas e interpretación de las mismas mediante actos de contenido general; b) evacuación de consultas de la Dirección. Las mismas deberán presentarse antes de configurarse el hecho imponible o dentro del plazo previsto para su declaración, conforme la reglamentación que fije la Dirección. La presentación de la consulta no suspenderá el transcurso de los plazos ni justificará el incumplimiento de los obligados, salvo para el impuesto de sellos de conformidad con la reglamentación. Las respuestas tendrán carácter vinculante y surtirán efectos únicamente entre las partes, en tanto no se hubieren alterado las circunstancias, antecedentes, modalidades de producción, elaboración o comercialización o los datos suministrados en oportunidad de emitirse dictamen o evacuación del asunto sobre el cual se hubiera requerido definición; c) otorgamiento de facilidades de pagos especiales; d) allanamiento y renuncias de apelaciones en las causas tributarias; e) resolución de pedidos de reconsideración y recursos de repetición de impuestos; f) remisión de sanciones. El Director General podrá facultar para la verificación y cobro de impuestos de personas físicas o jurídicas que tengan el asiento de sus negocios fuera de la Provincia, a terceros contratados por el Poder Ejecutivo, con ámbito de actuación en las respectivas zonas, conforme a las atribuciones y responsabilidades que surjan del decreto respectivo.
+
+ARTÍCULO 13.- Secundará al Director General en sus funciones el número de Subdirectores Generales que, hasta un máximo de cuatro determine el Ministerio de Hacienda, Finanzas, Obras y Servicios Públicos quienes deberán ser profesionales en ciencias económicas o abogados y reunir además los requisitos establecidos en el artículo 12 del Código Fiscal. Los Subdirectores Generales, de acuerdo con el orden de prelación que establezca la reglamentación vigente, lo reemplazarán en caso de ausencia o impedimento en todas sus funciones y atribuciones. Sin perjuicio de la competencia que se establece en los párrafos anteriores, podrá disponer el Director General que los Subdirectores Generales asuman la responsabilidad de determinadas funciones y atribuciones, señaladas por la naturaleza de las materias, por el ámbito territorial en que ejerzan sus funciones o por otras circunstancias.
+
+ARTÍCULO 14.- La Dirección no será competente para declarar la inconstitucionalidad de normas tributarias, pudiendo no obstante, la Cámara Fiscal aplicar la jurisprudencia de la Corte Suprema de Justicia de la Nación o del Superior Tribunal de Justicia de la Provincia de Misiones que haya declarado la inconstitucionalidad de dichas normas.
+
+ARTÍCULO 15.- En cualquier momento podrá la autoridad de aplicación solicitar embargo preventivo por la cantidad que presumiblemente adeudan los contribuyentes o responsables y los jueces deberán decretarlo en el término de veinticuatro (24) horas, bajo la responsabilidad del Fisco. Para probar la pretensión fiscal se deberá acompañar copia de la vista corrida o de las resoluciones dictadas en las actuaciones administrativas. En virtud de la presunción de legitimidad de los actos administrativos, tales elementos serán suficientes para la convicción y, por ende, para la acreditación de la verosimilitud del derecho del Fisco. Este embargo podrá ser sustituido por garantía real o personal suficiente, y podrá solicitarse la caducidad si dentro del término de noventa (90) días contados a partir de la traba de la última medida precautoria solicitada la autoridad de aplicación no iniciere el correspondiente juicio de ejecución fiscal. Iniciada la ejecución fiscal no podrá decretarse la caducidad de las medidas. A los fines de efectivizar el embargo preventivo decretado sobre los bienes muebles contenidos en una caja de seguridad bancaria, el oficial de justicia ad-hoc debe realizar un prolijo inventario no pudiendo recaer la medida sobre bienes inembargables conforme a lo dispuesto por el Código Procesal Civil y Comercial de la Provincia de Misiones y debiendo preservarse el derecho a la privacidad, con relación a aquellos otros elementos que pudieren encontrarse guardados en las cajas de seguridad, pero que resultan inconducentes para asegurar el crédito reclamado. El oficial de justicia ad-hoc dejará los bienes embargados en poder del banco como depositario provisional. En el caso de que lo embargado fuese dinero, deberá depositarlo en una cuenta en el banco que actúe como agente financiero de la Provincia a nombre de la causa y a la orden del juez competente. El término fijado para la caducidad del embargo se suspenderá desde la fecha de interposición del recurso administrativo o judicial, y hasta noventa (90) días después de quedar firme la resolución dictada. En todo cuanto no fuere previsto en este artículo resultará de aplicación las disposiciones contenidas en el Título XI del Libro I del presente Código.
+
+ARTÍCULO 16.- En las cabeceras de Departamentos de la Provincia o donde el Poder Ejecutivo y la Dirección lo determinen, habrá una delegación o receptoría, que tendrá a su cargo la percepción de los tributos establecidos en este Código u otras leyes que así lo establezcan. Obligaciones de Delegados y Receptores Sin perjuicio de las demás funciones que se le asignen serán obligaciones de los delegados y receptores de rentas: a) recaudar los tributos de conformidad con las instrucciones que le imparte la Dirección; b) registrar el movimiento de fondos y valores y rendir cuenta en la forma y tiempo que determine la reglamentación; c) prestar asesoramiento a los contribuyentes y velar por el estricto cumplimiento de las normas fiscales; Municipios: Sus funciones como delegados y receptores. El Poder Ejecutivo podrá convenir con los municipios cuando lo estime necesario, el cumplimiento por parte de éstos de las funciones atribuidas a las Delegaciones o Receptorías de Rentas. Asimismo, podrá autorizar a los municipios que cuenten con estructura adecuada para ello, a ejecutar por vía de ejecución fiscal los créditos que registre en concepto de Impuesto Provincial al Automotor, con las mismas facultades otorgadas a la Dirección
+
+edimiento que se establezca, con las deudas o saldos deudores de impuestos declarados por aquellos o determinados por la Dirección comenzando por los más remotos, salvo excepción de prescripción y aunque se refieran a distintas obligaciones fiscales. La Dirección podrá compensar en primer término los saldos acreedores con recargos, intereses y multas aplicados por resolución firme.
+
+Cobro por Vía de Ejecución Fiscal
+
+ARTÍCULO 81.- La resolución definitiva de la Dirección, o la decisión de la Cámara Fiscal que determine obligaciones impositivas debidamente notificadas, o la deuda resultante de declaraciones juradas o de los padrones de los contribuyentes del Impuesto Inmobiliario, que no sea seguida del pago en los términos establecidos en el artículo 78, podrá ser ejecutada por vía de ejecución fiscal, sin ulterior intimación de pago.
+
+Acreditación y Devolución
+
+ARTÍCULO 82.- La Dirección deberá, de oficio o a demanda de repetición del interesado, acreditarle las sumas que resultaren a beneficio del contribuyente o responsable por pagos no debidos o excesivos, como también disponer la devolución de lo pagado de más a solicitud del interesado, en forma simple y rápida según el procedimiento que aquella establezca.
+
+Rectificación de Declaraciones Juradas e Impugnaciones
+
+Los contribuyentes que rectifiquen declaraciones juradas anteriores, podrán compensar el saldo acreedor resultante de dicha rectificación, con la deuda emergente de nuevas declaraciones juradas del mismo gravamen, sin perjuicio de la facultad de la Dirección, de impugnar dicha compensación si la rectificación no fuere fundada y reclamar el pago de los importes indebidamente compensados, con más los recargos e intereses que pudieran corresponder.
+
+Intereses Resarcitorios
+
+La falta total o parcial de pago de los gravámenes, retenciones, percepciones, anticipos y demás pagos a cuenta, devengará desde sus respectivos vencimientos, sin necesidad de interpelación alguna y hasta el día del pago, de pedido de prórroga, de interposición de la demanda de ejecución fiscal, o de apertura de concurso, un tipo de interés cuya tasa no podrá exceder, en el momento de su fijación, al doble de la aplicada para el descuento de documentos comerciales por el banco que actúe como agente financiero de la Provincia de Misiones, que fijará con carácter general la Dirección, teniendo en cuenta en su caso, si se tratara de montos actualizados o no. La obligación de abonar estos intereses subsiste no obstante la falta de reserva por parte de la Dirección al recibir el pago de la deuda principal.
+
+Devoluciones, acreditaciones y compensaciones – Intereses
+
+ARTÍCULO 83.- El importe de las devoluciones, acreditaciones o compensaciones devengará el interés resarcitorio vigente desde la fecha de interposición del pedido de devolución, del reclamo administrativo, de la demanda judicial o del pedido de compensación, según corresponda. Cuando el pago indebido o en exceso fuere originado en determinaciones fehacientemente probadas o informaciones erróneas efectuadas por la Dirección General de Rentas, el interés establecido en el párrafo anterior, se devengará a partir de la fecha de dicho pago.
+
+TÍTULO X DE LA CÁMARA FISCAL Y DE LAS ACCIONES Y PROCEDIMIENTOS CONTENCIOSOS Y PENALES FISCALES
+
+Cámara Fiscal
+
+ARTÍCULO 84.- Créase la Cámara Fiscal de Apelaciones. La ley orgánica a dictarse precisará su integración y normas de funcionamiento. Hasta tanto se ponga en funcionamiento la Cámara Fiscal entenderá en los recursos de su competencia el Ministerio de Hacienda, Finanzas, Obras y Servicios Públicos de la Provincia, ajustándose a las normas vigentes en este Código y su reglamentación.
+
+Recurso de Reconsideración
+
+ARTÍCULO 85.- Contra las resoluciones de la Dirección que determinen gravamen, multas, liquiden intereses, calculen actualizaciones de deudas o denieguen exenciones, ya sea que hayan sido dictadas en forma conjunta o separada, el contribuyente o los responsables podrán interponer recursos de reconsideración respecto de cada resolución dentro de los quince (15) días de su notificación.
+
+Prueba - Ofrecimiento - Medios de Prueba
+
+ARTÍCULO 86.- El recurso de reconsideración se presentará ante la dependencia que haya dictado la resolución impugnada. Con el recurso deberá acompañarse la prueba documental y ofrecerse todas las demás de que el recurrente intentare valerse. Si no tuviere la prueba documental a su disposición, el recurrente la individualizará, indicando su contenido, el lugar del archivo, oficina pública y persona en cuyo poder se encuentre. Luego de la interposición del recurso no podrán ofrecerse otras pruebas, excepto por nuevos hechos acaecidos posteriormente. Serán admisibles todos los medios de pruebas, pudiéndose agregar informes, certificaciones y pericias producidas por profesionales con título habilitante.
+
+Plazo de Prueba
+
+ARTÍCULO 87.- El plazo para la producción de la prueba ofrecida, será de diez (10) días a contar desde la fecha de la interposición del recurso. Se podrá fijar un plazo mayor que no podrá exceder de treinta (30) días cuando la naturaleza de las pruebas ofrecidas así lo justifique. Durante el transcurso del término de producción de prueba y hasta el momento de dictar resolución, la Dirección podrá realizar todas las verificaciones, inspecciones y demás diligencias que se estimen convenientes para el esclarecimiento de los hechos objeto del recurso.
+
+Resolución
+
+ARTÍCULO 88.- Vencido el período de prueba fijado en el artículo 87 o desde la interposición del recurso en el supuesto de no producirse prueba se dictará resolución fundada dentro de los sesenta (60) días, pudiendo el Tribunal requerir medidas para mejor proveer las que serán evacuadas dentro de los quince (15) días.
+
+Efectos - Interposición – Reconsideración
+
+ARTÍCULO 89.- La interposición del recurso de reconsideración suspende la obligación de pago y la ejecución fiscal de los importes no aceptados: pero no interrumpe la aplicación de la actualización e intereses, en cuanto confirmada total o parcialmente la obligación fiscal recurrida. A tal efecto será requisito para interponer recurso de reconsideración, que el contribuyente o responsable regularice su situación fiscal en cuanto a los importes que se le reclaman y respecto de los cuales preste conformidad. Este requisito no será exigible cuando en el recurso se discuta la calidad de contribuyente o responsable.
+
+Término para apelar
+
+La resolución recaída en el recurso de reconsideración quedará firme a los quince (15) días de notificada, salvo que dentro de este plazo el recurrente interponga recurso de apelación ante la Cámara Fiscal.
+
+Recurso de Apelación
+
+ARTÍCULO 90.- El recurso de apelación deberá interponerse por escrito expresando punto por punto los agravios que cause al apelante la resolución recurrida. El recurrente deberá constituir domicilio en la ciudad capital y ser representado o patrocinado por abogado o contador público matriculado en la provincia.
+
+Admisibilidad
+
+Presentado el recurso de apelación, la Dirección sin más trámite ni sustanciación, examinará si el mismo es admisible y dictará resolución dentro de los cinco (5) días de presentado.
+
+Elevación a la Cámara Fiscal
+
+ARTÍCULO 91.- Declarado admisible el recurso se elevarán las actuaciones a la Cámara Fiscal para su conocimiento y decisión, dentro de los quince (15) días juntamente con un escrito de contestación a los fundamentos del apelante y ofrecimiento de la prueba a producir.
+
+Autos para resolver
+
+ARTÍCULO 92.- Cumplidos los trámites previstos en los artículos anteriores, la causa quedará en condiciones de ser fallada definitivamente, salvo lo dispuesto en el artículo 94, debiendo dictarse la correspondiente providencia de autos, la que será notificada a las partes.
+
+Nuevas pruebas
+
+ARTÍCULO 93.- En el recurso de apelación ante la Cámara Fiscal los recurrentes no podrán presentar nuevas pruebas salvo aquellas que se refieran a hechos posteriores o documentos que no pudieron presentarse ante la Dirección. Asimismo, podrán reiterar las pruebas no admitidas por la Dirección o aquellas que debiendo ser sustanciadas por ésta, no se hubieren cumplido debidamente.
+
+Medidas para Mejor Proveer
+
+ARTÍCULO 94.- La Cámara Fiscal tendrá facultades para disponer medidas para mejor proveer. En especial podrá convocar a las partes, a los peritos y a cualquier funcionario fiscal para procurar aclaraciones sobre puntos controvertidos. En este supuesto las partes podrán intervenir activamente e interrogar a los demás intervinientes. Las pruebas deben cumplimentarse con intervención de la Dirección, como órdenes, emplazamientos o diligencias y estarán a cargo del representante o apoderado de la Dirección interviniente en la causa, quien podrá dirigirse directamente a cualquier dependencia para recabar datos, elementos, antecedentes o todo tipo de información necesaria para tal fin. Las dependencias deberán proporcionarle toda documentación que requiera dentro de los plazos que se fijen al efecto.
+
+Resolución Cámara Fiscal
+
+ARTÍCULO 95.- La Cámara Fiscal dictará su decisión dentro de los sesenta (60) días de recibido el expediente. En dicho plazo no se computarán los días que requieren las medidas para mejor proveer dispuesta de conformidad con el artículo anterior. La decisión definitiva de la Cámara Fiscal se notificará dentro de los cinco (5) días de dictada. La notificación se realizará por cédula en la cual se transcribirán los fundamentos.
+
+Recurso de Nulidad
+
+ARTÍCULO 96.- El recurso de apelación comprende el de nulidad. La nulidad procede por omisión de alguno de los requisitos establecidos en el artículo 43 de este Código, defectos de forma en la resolución denegatoria del recurso de reconsideración, incompetencia del funcionario que la hubiere dictado, falta de admisión de la prueba ofrecida conducente a la solución de la causa o que admitida no fuere producida cuando su diligenciamiento estuviere a cargo del Fisco. Admitida la nulidad, el expediente se remitirá a la Dirección, quien deberá dictar resolución dentro de los treinta (30) días contados a partir de la fecha de recibidos los autos.
+
+Recurso de Queja
+
+ARTÍCULO 97.- Si la Dirección denegare la apelación, la resolución respectiva deberá ser fundada y especificar las circunstancias que la motivan, debiendo notificarse al apelante, el que podrá ocurrir en queja ante la Cámara Fiscal dentro de los cinco (5) días de haber sido notificado. Se entenderá que existe denegatoria tácita del recurso de apelación cuando no se resolviera sobre su admisibilidad dentro del plazo establecido en el artículo 90 de este Código. Cuando concedido el recurso no se elevara el expediente a la Cámara Fiscal dentro del plazo respectivo, el apelante podrá dirigirse directamente a la Cámara, quien dispondrá la remisión de las actuaciones dentro del tercer día.
+
+Recurso de Queja – Trámite
+
+ARTÍCULO 98.- Interpuesta la queja, la Cámara Fiscal librará oficio a la Dirección solicitando la remisión de las actuaciones, las que se elevarán dentro del tercer día. La resolución sobre la admisibilidad del recurso deberá dictarse dentro de los treinta (30) días de recibidas las actuaciones notificándola al recurrente. Si la Cámara declarara bien denegado el recurso, quedará abierta la vía contencioso administrativa en la forma prescripta por el artículo 99 de este Código. Si la Cámara declarara mal denegado el recurso acordando la apelación interpuesta, conferirá traslado de las actuaciones a los efectos de la contestación que prevé el artículo 91, debiendo contarse el término correspondiente desde la recepción de los mismos.
+
+Demanda Contencioso – Administrativa
+
+ARTÍCULO 99.- Contra las decisiones definitivas de la Cámara Fiscal dictadas en materia de su competencia o cuando la Cámara no las hubiera dictado en el plazo establecido en el artículo 95 de este Código, se podrá interponer demanda contenciosa administrativa ante el Superior Tribunal de Justicia previo pago de la suma adeudada a la Dirección en concepto de impuestos, actualizaciones e intereses en su caso, sin perjuicio del derecho de la Dirección de iniciar la correspondiente ejecución fiscal. La demanda deberá ser interpuesta dentro de los treinta (30) días hábiles, de notificada la resolución de la Cámara Fiscal. No serán aplicables las disposiciones de los artículos: 15, 24, 25, 27 al 33 y concordantes de la Ley I – N.° 95 (Antes Ley 3064), Código de Procedimiento Contencioso Administrativo.
+
+Intervención de la Fiscalía de Estado
+
+En todas las acciones contenciosas administrativas iniciadas contra la Dirección General de Rentas se deberá dar participación como parte al Fiscal de Estado en los términos del artículo 128 de la Constitución Provincial. En aquellos procesos en trámite, en los que no se hubiere clausurado el período probatorio, se suspenderá el proceso y se dará debida participación al Fiscal de Estado. El incumplimiento de esta disposición determinará la nulidad del proceso.
+
+Demandas de Repetición. Trámite
+
+ARTÍCULO 100.- Los contribuyentes o responsables podrán interponer ante la Dirección reclamos de repetición de los gravámenes y sus accesorios cuando consideren que el pago hubiere sido indebido o sin causa. En caso de que el reclamo fuera promovido por agentes de recaudación, éstos deberán presentar nómina de los contribuyentes a quienes la Dirección efectuará la devolución de los importes cuestionados, salvo que acrediten la debida autorización en dicho acto pero que hubieran sido debidamente individualizados. La Dirección, previa sustanciación de las pruebas ofrecidas o de las otras
+
+ue fije la Ley de Alícuotas sobre los montos imponibles respectivos, los actos que se mencionan a continuación, en oportunidad del otorgamiento de las escrituras públicas:
+
+a) compraventa o permuta de inmuebles o cualquier otro acto por el cual se transfiere el dominio de estos bienes a título oneroso. Están incluidas las transferencias del dominio de inmuebles que se realicen con motivo de: 1 - aportes de capital a sociedades; 2 - transferencias de establecimientos comerciales o industriales; 3 - disolución de sociedades y adjudicación a los socios; b) constitución de derechos reales sobre inmuebles; c) emisión de debentures con garantía hipotecaria; d) los casos mencionados en el artículo 2696 del Código Civil; e) los títulos informativos de propiedad, al dictarse el auto de aprobación judicial.
+
+Actos sin escrituras - Boletos de compraventa y permuta - Pago a cuenta ARTÍCULO 183.- El impuesto previsto en el artículo anterior debe abonarse aún en los casos en que no se realice escritura pública, por existir disposiciones legales que así lo autoricen en las oportunidades que determine la Dirección. En el caso de transferencias de inmuebles se computará como pago a cuenta el impuesto de sellos pagado sobre los boletos de compraventa y permuta y las cesiones de los mismos cuando se trate de bienes inmuebles, o sobre los contratos de sociedad en la parte correspondiente al valor de los inmuebles.
+
+CAPÍTULO II BASES IMPONIBLES Y EXENCIONES Contratos de Ejecución Sucesivas ARTÍCULO 184.- En los contratos de ejecución sucesiva, pagos periódicos y otros análogos, el impuesto se aplicará sobre el valor correspondiente a la duración total o a los primeros cinco (5) años, si son por más tiempo. Si la duración no fuera prevista, el impuesto se calculará como si aquella fuera de cinco (5) años.
+
+Prórrogas ARTÍCULO 185.- El valor de los contratos en que se prevea su prórroga, se determinará de la manera siguiente: a) cuando la prórroga deba producirse por el sólo silencio de las partes o aun cuando exista el derecho de rescisión por manifestación expresa de voluntad de ambas o de una de ellas, se calculará el tiempo de duración del contrato inicial más el período de prórroga. Cuando la prórroga sea por tiempo indeterminado, se la considerará como de cuatro (4) años, que se sumará al período inicial; si la prórroga fuera por períodos sucesivos se tomará el total de éstos, hasta un máximo de cinco (5) años; b) cuando la prórroga está supeditada a una expresa declaración de voluntad de ambas partes o de una de ellas, se tomará como monto imponible sólo el que corresponde al período inicial; al instrumentarse la prórroga o la opción, se abonará el impuesto correspondiente a la misma.
+
+Sociedades formalizadas en la jurisdicción - Prórrogas - Aumento de capital ARTÍCULO 186.- El impuesto correspondiente a los contratos de constitución de sociedad y ampliaciones de su capital social formalizados en esta jurisdicción se calculará sobre el monto del capital social o del aumento, respectivamente, deduciéndose el valor asignado a los bienes mencionados en el inciso e) del artículo 170. Si correspondiere deducir el valor de aportes constituidos por bienes inmuebles, se tomará el valor asignado en el contrato o la valuación fiscal, el que sea mayor. En las prórrogas del término de duración de la sociedad se tomará el importe del capital social sin considerar la naturaleza y ubicación de los bienes que lo componen. Si simultáneamente con la prórroga se aumentase el capital social, se tomará el importe del capital primitivo y del aumento, deduciéndose el valor de los nuevos bienes que se aporten con motivo del aumento, que correspondan a la naturaleza de los designados en el inciso e) del artículo 170. Si correspondiere deducir el valor de nuevos aportes constituidos por bienes inmuebles, se tomará el valor asignado en el contrato o la valuación fiscal el que sea mayor.
+
+Sociedades formalizadas fuera de la jurisdicción – Prórrogas ARTÍCULO 187.- El impuesto que corresponda por los aportes en bienes de la naturaleza de los designados en el inciso e) del artículo 169, se pagará en oportunidad de constituirse la sociedad o formalizarse el aumento, sobre el valor asignado a dichos bienes en el respectivo contrato. Si se tratara de bienes inmuebles se estará al valor asignado en el contrato o la valuación fiscal, el que sea mayor. Las prórrogas del término de duración del contrato de sociedades domiciliadas en la provincia que se convinieran fuera de ella pagarán el impuesto de acuerdo con lo establecido en el párrafo segundo del artículo 186 en oportunidad de documentarse las respectivas prórrogas.
+
+Sociedades - Aportes de inmuebles ARTÍCULO 188.- En el caso de escrituras traslativas de dominio de bienes inmuebles efectuadas en cumplimiento del compromiso de aportes, se deducirá el importe del impuesto que se hubiera satisfecho en oportunidad de constituirse la sociedad o formalizarse el aumento de su capital social, en un todo de acuerdo con lo establecido en el artículo 183, último párrafo. Si no se demostrase el pago del impuesto correspondiente al acto de constitución de la sociedad o aumento de su capital social, se integrará la totalidad de la tasa por la transferencia de inmuebles, con más la multa correspondiente sobre el impuesto omitido por aquellos actos. En las transferencias de inmuebles como aporte de capital a sociedades, el impuesto se aplicará sobre el valor de los inmuebles o de su valuación fiscal, el que sea mayor.
+
+Sociedades Anónimas - Sociedades constituidas en el extranjero ARTÍCULO 189.- Las sociedades anónimas abonarán el impuesto en el momento de su constitución definitiva. En los casos de constitución por suscripción pública corresponderá abonar el impuesto en el momento de ser labrada el acta de la asamblea constitutiva. Los aumentos del capital accionario de cualquier tipo de sociedad abonarán el impuesto en el momento de ser decidido el aumento sobre la respectiva acta de asamblea o sobre una copia de la misma en la cual el órgano de representación social deberá dejar constancia de su autenticidad. Cuando por ley o por los estatutos o por resolución de la asamblea que decide el aumento, sea necesaria la escritura pública para dejar perfeccionado este último, el impuesto podrá abonarse en oportunidad de otorgarse la respectiva escritura. Si luego de tales actos se efectuaren aportes en bienes comprendidos en el inciso e) del artículo 170, se admitirá la devolución de la parte del impuesto ingresado que corresponda a dichos bienes, debidamente actualizado de acuerdo con las disposiciones vigentes, desde la fecha de pago hasta la fecha de efectivización del aporte referido. Las sociedades constituidas en el extranjero que solicitan la inscripción de sus contratos en el Registro Público de Comercio u organismos correspondientes, pagarán el impuesto sobre el capital asignado a la sucursal o agencia a establecer en la provincia, que se determinará, en su caso, por estimación fundada. Este impuesto deberá hacerse efectivo antes de procederse a la inscripción.
+
+Pólizas de fletamento ARTÍCULO 190.- En las pólizas de fletamento el valor imponible estará constituido por el importe del flete más el de la capa o gratificación al capitán.
+
+Derechos Reales ARTÍCULO 191.- En la constitución de derechos reales el monto imponible será el precio pactado, o en su caso, la suma garantizada; en su defecto, los siguientes: a) en el usufructo vitalicio se determinará de acuerdo a la siguiente escala sobre la valuación fiscal del o de los inmuebles: Edad del usufructuario: Porcentaje Hasta 30 años 90% Más de 30 y hasta 40 80% Más de 40 y hasta 50 70% Más de 50 y hasta 60 50% Más de 60 y hasta 70 40% Más de 70 20% b) en el usufructo temporario se determinará como monto imponible el 20% de la valuación del bien por cada período de diez (10) años de duración, o la parte proporcional en caso de períodos o fracciones menores. Si el usufructo fuera por un tiempo mayor de treinta (30) años se aplicará la escala del inciso a); c) en la transferencia de la nuda propiedad se considerará como monto imponible la mitad de la valuación fiscal; d) en la constitución de derechos de uso y habitación se considerará como monto imponible el cinco por ciento (5%) de la valuación fiscal por cada año o fracción de duración; e) en la constitución de otros derechos reales se determinará el valor por estimación fundada, de conformidad con lo dispuesto en el artículo 203.
+
+Operaciones sobre Inmuebles ARTÍCULO 192.- El impuesto establecido en el inciso a) del artículo 182 se abonará sobre el precio total, aun cuando en el contrato se reconozcan hipotecas preexistentes que se descuenten del precio. Si el adquirente se hace cargo de esas obligaciones, salvo que se prorrogue su vencimiento en cuyo caso se aplicará el impuesto del inciso b) del artículo 182 independientemente del gravamen a la transferencia del dominio.
+
+Si en el contrato no se fijare precio o el pactado en el mismo, determinado según el párrafo anterior, fuera inferior a la valuación fiscal del inmueble, se tomará ésta como monto imponible.
+
+Permutas ARTÍCULO 193.- En las permutas el impuesto se aplicará sobre la mitad de la suma de los valores que se permuten. Si en la permuta de inmuebles no hubiera valor asignado a los mismos o éste fuera inferior a las valuaciones fiscales de los bienes respectivos, el impuesto se aplicará sobre la mitad del valor resultante de la suma de las valuaciones fiscales.
+
+Casos de inmuebles ubicados en varias jurisdicciones ARTÍCULO 194.- Si los inmuebles están ubicados parte en jurisdicción de la Provincia y parte en otra jurisdicción, y la transferencia se realiza por un precio sin determinarse en el respectivo instrumento los valores que corresponden a cada jurisdicción, el impuesto se aplicará sobre el importe resultante de proporcionar el monto imponible, en función de las valuaciones fiscales de los inmuebles. En ningún caso el monto imponible podrá ser inferior a la valuación fiscal del o de los inmuebles ubicados en esta jurisdicción.
+
+Permutas de bienes ubicados en varias jurisdicciones ARTÍCULO 195.- En caso de permutas que comprendan bienes ubicados en varias jurisdicciones el impuesto se aplicará sobre la valuación fiscal total del o de los inmuebles ubicados en esta jurisdicción o sobre el mayor valor asignado a tales bienes.
+
+Hipotecas sobre inmuebles ubicados en varias jurisdicciones ARTÍCULO 196.- Cuando se constituyen hipotecas sobre inmuebles ubicados en varias jurisdicciones sin afectarse a cada uno de ellos con una cantidad líquida, el impuesto se aplicará sobre la valuación fiscal del o de los inmuebles ubicados en esta jurisdicción. En ningún caso el impuesto podrá aplicarse sobre una suma mayor a la del crédito garantizado.
+
+Locación - Varias jurisdicciones ARTÍCULO 197.- En los contratos de locación o sublocación de inmuebles ubicados en varias jurisdicciones, así como los que instrumenten la locación de servicios y obras - públicas o privadas - sobre tales bienes, el impuesto se aplicará:
+
+a) En los contratos de locación o sublocación de los bienes: sobre el importe resultante de proporcionar el monto imponible en función de las valuaciones fiscales de los inmuebles, siempre que del instrumento respectivo no surja el monto atribuible a cada jurisdicción; b) en los contratos de locación de servicios y obras públicas o privadas; sobre el valor que corresponda a la parte realizada o a realizarse en jurisdicción de la Provincia.
+
+Transferencias de Establecimientos Comerciales Industriales ARTÍCULO 198.- En las transferencias de establecimientos comerciales o industriales, el monto imponible será el precio neto de la operación. Si en la transferencia estuvieran comprendidos bienes inmuebles ubicados en la Provincia, se procederá análogamente a los dispuesto en el artículo 192.
+
+Renta Vitalicia ARTÍCULO 199.- En los contratos de renta vitalicia se aplicará el impuesto sobre el valor de los bienes entregados para obtenerla. Cuando éstos fueran inmuebles se aplicarán las reglas del artículo 191.
+
+Contratos de Fideicomiso o Transferencia Fiduciaria ARTÍCULO 200.- Los contratos de transmisión de la propiedad fiduciaria de muebles e inmuebles resultan alcanzados por el Impuesto, siempre que se cumplan los requisitos configuradores del hecho imponible a saber: territorialidad, onerosidad e instrumentación. En los actos de constitución y transferencia fiduciaria, cuando el desplazamiento de los bienes en favor del fiduciario se produce en seguridad de una deuda propia del transmitente, la base imponible del impuesto será la suma garantizada. En los contratos de fideicomiso de administración, el impuesto se liquidará a la alícuota del diez por mil (10 ‰) sobre la retribución periódica pactada con el fiduciario. En los casos de contratos de fideicomiso financiero el impuesto se liquidará sobre el monto de la suma garantizada aplicando la alícuota del diez por mil (10 ‰). El acto de transferencia del dominio a la fiduciaria a los efectos de la constitución del patrimonio de afectación no tributará el impuesto de esta ley, siempre que se trate de un acto gratuito.
+
+Se reputará oneroso el acto de adjudicación de unidades funcionales debiendo liquidarse el impuesto tomando como base imponible
+
+### ley_impositiva_misiones_2024.txt
+LEY XXII – N.º 25 (Antes Ley 3262) LEY DE ALÍCUOTAS
+
+ARTÍCULO 1.- Los tributos establecidos en la Ley XXII – N . ° 35 (Antes Ley 4366) - Código Fiscal de la Provincia de Misiones, se recaudarán con arreglo a las alícuotas, escalas y montos que se fijan a continuación:
+
+TÍTULO I IMPUESTO INMOBILIARIO
+
+ARTÍCULO 2.- Establécense, a efectos de lo dispuesto en el Artículo 132 de la Ley XXII – N . º 35 (Antes Ley 4366) - Código Fiscal, las siguientes alícuotas: a) Inmuebles Urbanos Edificados: VALUACIÓN FISCAL ALÍCUOTAS Vivienda económica única 6 ‰ Hasta $ 30.000 (excepto vivienda económica única) 8 ‰ Más de $ 30.000 hasta $ 70.000 10 ‰ Más de $ 70.000 12 ‰ La Dirección General de Rentas instrumentará la categorización y acreditación de las viviendas económicas únicas. b) Inmuebles urbanos baldíos 15 ‰ c) Inmuebles suburbanos 12 ‰ d) Inmuebles rurales 12 ‰
+
+ARTÍCULO 3.- Fíjanse, a efectos de lo dispuesto en el Artículo 132 - in fine - de la Ley XXII – N . ° 35 (Antes Ley 4366) - Código Fiscal, cargos mínimos, los importes que a continuación se detallan: Inmuebles Urbanos a) cargos mínimos para inmuebles del Municipio Posadas (59), sección catastral N . º 1: pesos sesenta y dos ($ 62 ,00); b) cargos mínimos para inmuebles del Municipio Posadas (59), secciones catastrales N . º 2, 3, 7, 8, 9, 14, 15, 16, 17, 18, 19 y 20; Municipio Apóstoles (04), sección catastral N . º 1; Municipio Eldorado (30), secciones catastrales N . º 7, 8, 9, 10, 11, 12, 13, 14 , 15 y 16; Municipio Oberá (55), secciones catastrales N . º 4, 5, 6, 7, 8, 9, 10, 11 y 12; Municipio Puerto Rico (61), sección catastral N . º 4; Municipio Iguazú (43), sección catastral N . º 2; Municipio Leandro N. Alem (46), secciones catastrales N . º 3 , 4, 5 y 6: pesos cuarenta y cuatro ($ 44,00); c) cargos mínimos para los inmuebles situados en el resto de las secciones catastrales de los municipios no comprendidos en la enumeración de los apartados a) y b) y demás centros urbanos de la provincia: pesos veintidós ($ 22,00). Inmuebles Suburbanos y Rurales a) cargos mínimos para los inmuebles suburbanos: pesos veintidós ($ 22,00); b) cargos mínimos para inmuebles rurales de las zonas agroeconómicas N . º 1, 2 y 10: pesos cuarenta y dos ($ 42,00); c) cargos mínimos para los inmuebles rurales de las zonas agroeconómicas N . º 6, 12, 16 y 17: pesos veintisiete ($ 27,00); d) cargos mínimos para los inmuebles rurales de las zonas agroeconómicas N . º 3, 4, 5, 7, 8, 9, 11, 13, 14 y 15: pesos treinta y cuatro ($ 34,00).
+
+ARTÍCULO 4.- Fíjase, a los efectos de lo establecido en el Artículo 133 de la Ley XXII – N . ° 35 (Antes Ley 4366) - Código Fiscal, un incremento del doscientos por ciento (200%).
+
+ARTÍCULO 5.- Fíjase, a los efectos de lo establecido en el Artículo 139 , inciso g) de la Ley XXII – N . ° 35 (Antes Ley 4366) - Código Fiscal - nuevas construcciones - la suma de pesos veinticinco mil doscientos ($ 25.200,00).
+
+ARTÍCULO 6.- Establécese una bonificación especial del diez por ciento (10%) para aquellos contribuyentes que abonen de contado el total del impuesto dentro del término que se fije para el pago de la primera cuota correspondiente al año fiscal.
+
+ARTÍCULO 7.- Establécese una bonificación del cinco por ciento (5%), sobre cada cuota abonada en término.
+
+ARTÍCULO 8.- El Poder Ejecutivo queda facultado para que, a través de los organismos competentes, aplique la escala de alícuotas, cargos mínimos y bonificaciones y demás especificaciones establecidas en el presente Título.
+
+ARTÍCULO 9.- Facúltase al Poder Ejecutivo, con intervención de la Dirección General de Catastro, a disponer una valuación general de los bienes inmuebles en todo el territorio provincial. A tal efecto, podrá fijar nuevos procedimientos para la determinación de coeficientes de actualización y valores básicos óptimos y mínimos, para la determinación de las valuaciones fiscales de las tierras urbanas, suburbanas y rurales, edificios y plantaciones. El Poder Ejecutivo debe comunicar a la Cámara de Representantes los coeficientes de actualización y valores básicos óptimos y mínimos que fije en uso de las facultades conferidas precedentemente.
+
+TÍTULO II IMPUESTO SOBRE LOS INGRESOS BRUTOS
+
+ARTÍCULO 10.- De conformidad a lo prescripto por el Artículo 157 inciso k) de la Ley XXII – N . ° 35 (Antes Ley 4366 ) - Código Fiscal y normas reglamentarias, se encuentran exentas las actividades de producción primaria que se detallan en los rubros A y B del Anexo I, salvo las actividades gravadas, que en cada caso se individualizan, y para lo prescripto en el Artículo 12, excepto ventas efectuadas en ferias francas.
+
+ARTÍCULO 11.- De conformidad a lo prescripto por el Artículo 166 de la Ley XXII – N . ° 35 (Antes Ley 4366) - Código Fiscal y normas reglamentarias, establécese la alícuota general de dos con cincuenta centésimos por ciento (2,50%), para las actividades de producción y comercialización de bienes, locaciones y prestaciones de obras y servicios, que se enumeran en los rubros C), D), E), F), G), H), I), J), K), L), M), N), O), P) y Q) del Anexo I, salvo para las actividades exentas y con alícuotas diferenciadas - que en cada caso se individualizan - y para lo prescripto en el Artículo 12.
+
+ARTÍCULO 12.- Establécese la alícuota de tres con cuarenta centésimos por ciento (3,40%), para la comercialización de bienes, locaciones y prestaciones de obras y servicios, cualquiera fuese la actividad, cuando los mismos sean comercializados o prestados, según el caso, en forma directa a consumidores finales. Esta prescripción será aplicable cuando la actividad no está alcanzada por una alícuota mayor establecida en la presente Ley o en leyes especiales que se dicten.
+
+ARTÍCULO 13.- Por el ejercicio habitual y a título oneroso, en jurisdicción de la Provincia de Misiones, de las actividades que se detallan a continuación, establécense como anticipos mínimos mensuales del Impuesto sobre los Ingresos Brutos, los importes que se detallan, independientemente de que el contribuyente esté sujeto al régimen de emisión de comprobantes mediante utilización del equipamiento denominado "Controladores Fiscales" establecido por la Administración Federal de Ingresos Públicos. Exclúyese de los alcances del presente artículo a los contribuyentes que determinen anticipos del impuesto superiores a los mínimos fijados y a los que desarrollen actividades gravadas con alícuotas cero, excepto en la proporción correspondiente a ventas, locaciones o prestaciones de servicios efectuadas directamente a consumidores finales. El Poder Ejecutivo establecerá los mecanismos y formalidades a fin de que, al finalizar el ejercicio fiscal, la sumatoria de los anticipos mínimos mensuales no supere el total de obligaciones que, en razón de los ingresos brutos efectivamente obtenidos, corresponda determinar e ingresar al contribuyente. Servicios de salones de baile, discotecas y similares; servicios de créditos no clasificados en otra parte, incluyendo el otorgamiento de préstamos por entidades que no reciben depósitos y que están fuera del sistema bancario y cuyo destino es financiar el consumo u otros bienes, exceptuando la vivienda . $ 70,00. Servicios de salones de juego, incluyendo salones de billar, pool, bowling, juegos electrónicos, etc., hasta tres (3) juegos. $ 5,00 c/u. Servicios de salones de juego, incluyendo salones de billar, pool, bowling, juegos electrónicos, etc., más de tres juegos. $ 8,00 c/u Servicios de transporte escolar efectuado durante el ciclo escolar respectivo; transporte para colonias de vacaciones y clubes, por cada asiento habilitado. $ 1,92. Servicios de alojamientos por hora, por cada habitación habilitada. $ 40,00. Actividades desarrolladas en locales comerciales cuyas dimensiones no superen los cinco (5) metros cuadrados de extensión. $ 13,70. Actividades de vendedores a consumidor final, sean ambulantes o con puestos fijos en la vía pública. $ 10,30 Servicios prestados en playas de estacionamiento, por cada espacio de quince metros cuadrados destinados a la guarda de cada unidad. $ 2,51. Servicio de transporte automotor de pasajeros mediante taxímetros libres y remises, por cada móvil en actividad. $ 25,00. Servicio de transporte automotor de pasajeros mediante taxímetros con parada fija, por cada móvil en actividad. $ 20,00 Para los demás contribuyentes directos del impuesto sobre los ingresos brutos que no se encuentren comprendidos en algunas de las actividades precedentes y, en base a los ingresos brutos correspondientes al período fiscal inmediato anterior, los importes que en cada caso se fijen: IIBB hasta $ 5.000,00 $ 15,00 IIBB de $ 5.000,00 hasta $ 10.000,00 $ 28 ,00 IIBB de $ 10.000,00 hasta $ 15.000,00 $ 45,00 IIBB de $ 15.000,00 hasta $ 20.000,00 $ 60,00
+
+ARTÍCULO 14.- El Poder Ejecutivo podrá establecer bonificaciones de hasta un veinte por ciento (20%) en el importe de anticipos mínimos mensuales del impuesto previsto en el presente título, para cumplimientos correctos y en término de las obligaciones fiscales.
+
+ARTÍCULO 15.- Establécense los siguientes topes mínimos y máximos de la multa por infracción, a los deberes formales previstos en el Artículo 50 de la Ley XXII – N . ° 35 (Antes Ley 4366) - Código Fiscal. Tope mínimo $ 10,00. Tope máximo $ 8.000,00.
+
+ARTÍCULO 16.- De conformidad con lo establecido en el Artículo 166 de la Ley XXII – N . ° 35 (Antes Ley 4366) - Código Fiscal y normas reglamentarias, se establece la alícuota base cero por ciento (0,00%), para las actividades que a continuación se detallan y siempre que no tengan otro tratamiento en esta Ley y en el Código Fiscal: Empresas de Turismo y Otras Actividades No Clasificadas Actividad turística y actividades conexas realizadas en el Municipio de Puerto Iguazú exclusivamente. Actividades conexas incluye: a) servicios de alojamiento, comida y hospedaje prestado por hoteles, residenciales, hosterías, pensiones, campamentos y casa de huéspedes, moteles, bungaloes y que estén inscriptos en la Subsecretaría de Turismo de la Provincia; b) servicios de comidas y bebidas en restaurantes y cantinas, pizzerías, "grill", "snack bar", "fast food", parrillas, bares, cafés, "whiskerías", cervecerías, heladerías y expendio de productos lácteos, confitería, salones de té, etcétera. Asimismo todo comercio relacionado con el servicio turístico; c) transportes locales urbanos y suburbanos de pasajeros, transporte de pasajeros en taxímetros y remises, ómnibus y otros automotores de turismo, alquiler de automóviles con o sin chofer; d) servicios de playas de estacionamiento, garaje, lavado automático de automotores y servicios prestados por estaciones de servicios; e) servicios prestados por agencias de turismo, destinados al Municipio de Puerto Iguazú; f) servicios de alquiler de lanchas y botes; g) servicios prestados por salones de baile, discotecas y similares, relacionados con espectáculos deportivos, teatrales, musicales y cinematográficos; h) servicios culturales de bibliotecas , museos, jardines botánicos y zoológicos, y otros servicios culturales no contemplados expresamente.
+
+ARTÍCULO 17.- En la asignación de los incrementos de recaudación generados a partir del 17 de junio del año 2008, el Poder Ejecutivo otorgará prioridad a las
+
+### calendario_vencimientos_dgr_misiones_2024.txt
+I - Impuestos sobre los Ingresos Brutos - (Directo y Convenio Multilateral)
+
+1 - Declaración Jurada Mensual. Vencimientos según terminación N° de CUIT IIBB DIRECTO
+
+Mes | 0 - 1 | 2 - 3 | 4 - 5 | 6 - 7 | 8 - 9
+Enero | 14/02/2024 | 15/02/2024 | 16/02/2024 | 19/02/2024 | 20/02/2024
+Febrero | 13/03/2024 | 14/03/2024 | 15/03/2024 | 18/03/2024 | 19/03/2024
+Marzo | 15/04/2024 | 16/04/2024 | 17/04/2024 | 18/04/2024 | 19/04/2024
+Abril | 13/05/2024 | 14/05/2024 | 15/05/2024 | 16/05/2024 | 17/05/2024
+Mayo | 13/06/2024 | 14/06/2024 | 18/06/2024 | 19/06/2024 | 21/06/2024
+Junio | 15/07/2024 | 16/07/2024 | 17/07/2024 | 18/07/2024 | 19/07/2024
+Julio | 13/08/2024 | 14/08/2024 | 15/08/2024 | 16/08/2024 | 19/08/2024
+Agosto | 13/09/2024 | 16/09/2024 | 17/09/2024 | 18/09/2024 | 19/09/2024
+Septiembre | 14/10/2024 | 15/10/2024 | 16/10/2024 | 17/10/2024 | 18/10/2024
+Octubre | 13/11/2024 | 14/11/2024 | 15/11/2024 | 19/11/2024 | 20/11/2024
+Noviembre | 13/12/2024 | 16/12/2024 | 17/12/2024 | 18/12/2024 | 19/12/2024
+Diciembre | 13/01/2025 | 14/01/2025 | 15/01/2025 | 16/01/2025 | 17/01/2025
+
+Vencimientos según dígito verificador de CUIT Contribuyentes de Convenio Multilateral R.G. (C.A.) 10/2023 Anticipos
+
+0 a 2 | 3 a 5 | 6 a 7 | 8 a 9
+15/02/2024 | 16/02/2024 | 19/02/2024 | 20/02/2024
+15/03/2024 | 18/03/2024 | 19/03/2024 | 20/03/2024
+15/04/2024 | 16/04/2024 | 17/04/2024 | 18/04/2024
+15/05/2024 | 16/05/2024 | 17/05/2024 | 20/05/2024
+14/06/2024 | 18/06/2024 | 19/06/2024 | 21/06/2024
+15/07/2024 | 16/07/2024 | 17/07/2024 | 18/07/2024
+15/08/2024 | 16/08/2024 | 19/08/2024 | 20/08/2024
+16/09/2024 | 17/09/2024 | 18/09/2024 | 19/09/2024
+15/10/2024 | 16/10/2024 | 17/10/2024 | 18/10/2024
+15/11/2024 | 19/11/2024 | 20/11/2024 | 21/11/2024
+16/12/2024 | 17/12/2024 | 18/12/2024 | 19/12/2024
+15/01/2025 | 16/01/2025 | 17/01/2025 | 20/01/2025
+
+2 - Declaración Jurada Anual 2023. Contribuyentes Directos - Form SR - 320 Vencimiento 30/04/2024 - R.G. N°02/2009.
+
+3 - Declaración Jurada Anual 2023 Contribuyentes de Convenio Multilateral - Formulario CM05 – operará el 28 de junio del 2024.
+
+II - Agente de Retención / Percepción Impuesto sobre los Ingresos Brutos Form. 128 - 128/A - 129 - 129/ Declaración Jurada y Pago Mensual.
+
+MES | VENCIMIENTOS
+Enero | 14/02/2024
+Febrero | 11/03/2024
+Marzo | 10/04/2024
+Abril | 10/05/2024
+Mayo | 10/06/2024
+Junio | 10/07/2024
+Julio | 12/08/2024
+Agosto | 10/09/2024
+Septiembre | 10/10/2024
+Octubre | 11/11/2024
+Noviembre | 10/12/2024
+Diciembre | 10/01/2025
+
+III - Agente de Retención del Impuesto sobre los Ingresos Brutos - BANCOS. Régimen 25 RG 35/2002 y Modificatorias. Declaración Jurada y Pago Quincenal.
+
+Quincena | Mes | Fecha Vencimiento
+1 | Enero | 19/01/2024
+2 | | 06/02/2024
+1 | Febrero | 21/02/2024
+2 | | 06/03/2024
+1 | Marzo | 21/03/2024
+2 | | 05/04/2024
+1 | Abril | 19/04/2024
+2 | | 07/05/2024
+1 | Mayo | 21/05/2024
+2 | | 06/06/2024
+1 | Junio | 24/06/2024
+2 | | 04/07/2024
+1 | Julio | 19/07/2024
+2 | | 06/08/2024
+1 | Agosto | 21/08/2024
+2 | | 05/09/2024
+1 | Septiembre | 19/09/2024
+2 | | 04/10/2024
+1 | Octubre | 21/10/2024
+2 | | 06/11/2024
+1 | Noviembre | 22/11/2024
+2 | | 05/12/2024
+1 | Diciembre | 19/12/2024
+2 | | 06/01/2025
+
+IV - Agente de Retención de Sellos. Form 134 - 134/A Declaración Jurada Mensual.
+
+MES | VENCIMIENTOS
+Enero | 14/02/2024
+Febrero | 11/03/2024
+Marzo | 10/04/2024
+Abril | 10/05/2024
+Mayo | 10/06/2024
+Junio | 10/07/2024
+Julio | 12/08/2024
+Agosto | 10/09/2024
+Septiembre | 10/10/2024
+Octubre | 11/11/2024
+Noviembre | 10/12/2024
+Diciembre | 10/01/2025
+
+V - Impuesto de Sellos Directo. Form. 154 y 154/A - R.G N°29/2006 - DGR. Quincena Mes Fecha de Vencimiento N° de Obligación
+
+Quincena | Mes | Fecha de Vencimiento | N° de Obligación
+1 | Enero | 25/01/2024 | 1
+2 | | 14/02/2024 | 2
+1 | Febrero | 26/02/2024 | 3
+2 | | 11/03/2024 | 4
+1 | Marzo | 25/03/2024 | 5
+2 | | 10/04/2024 | 6
+1 | Abril | 25/04/2024 | 7
+2 | | 10/05/2024 | 8
+1 | Mayo | 27/05/2024 | 9
+2 | | 10/06/2024 | 10
+1 | Junio | 25/06/2024 | 11
+2 | | 10/07/2024 | 12
+1 | Julio | 25/07/2024 | 13
+2 | | 12/08/2024 | 14
+1 | Agosto | 26/08/2024 | 15
+2 | | 10/09/2024 | 16
+1 | Septiembre | 25/09/2024 | 17
+2 | | 10/10/2024 | 18
+1 | Octubre | 25/10/2024 | 19
+2 | | 11/11/2024 | 20
+1 | Noviembre | 25/11/2024 | 21
+2 | | 10/12/2024 | 22
+1 | Diciembre | 26/12/2024 | 23
+2 | | 10/01/2025 | 24
+
+VI - Agente de Información Entidades Financieras Declaración Jurada Bimestral. Formulario SF 153 - R.G.N°21/2006 - DGR - Modificada por R.G.N°07/2009 - Artículo 1°.
+
+BIMESTRE | VENCIMIENTOS
+Enero - Febrero | 15/03/2024
+Marzo - Abril | 15/05/2024
+Mayo - Junio | 15/07/2024
+Julio - Agosto | 16/09/2024
+Septiembre - Octubre | 15/11/2024
+Noviembre - Diciembre | 15/01/2025
+
+VII - Agente de Información. Ley N° 4316. Producción Originaria de la Provincia de Misiones Yerba y Té. Declaración Jurada Mensual. Form - 160 - 161
+
+MES | VENCIMIENTOS
+Enero | 20/02/2024
+Febrero | 20/03/2024
+Marzo | 22/04/2024
+Abril | 20/05/2024
+Mayo | 21/06/2024
+Junio | 22/07/2024
+Julio | 20/08/2024
+Agosto | 20/09/2024
+Septiembre | 21/10/2024
+Octubre | 20/11/2024
+Noviembre | 20/12/2024
+Diciembre | 20/01/2025
+
+VIII - Agente de Información PROVEEDORES R.G. 23/2000 - (R.G 08/2002) Form SF - 132
+
+AÑO | VENCIMIENTOS
+2023 | 01/04/2024
+
+IX - Agente de Información - R.G.N°20/2010 - Form.SR - 170 Régimen de Información Comercialización Gas Licuado Declaración Jurada Mensual
+
+MES | VENCIMIENTOS
+Enero | 20/02/2024
+Febrero | 20/03/2024
+Marzo | 22/04/2024
+Abril | 20/05/2024
+Mayo | 21/06/2024
+Junio | 22/07/2024
+Julio | 20/08/2024
+Agosto | 20/09/2024
+Septiembre | 21/10/2024
+Octubre | 20/11/2024
+Noviembre | 20/12/2024
+Diciembre | 20/01/2025
+
+X - Agente de Información - R.G. N°19/2010 - Form.SR - 366 WEB Registro Parque Móvil de la Actividad Transporte Presentaciones Semestrales.
+
+SEMESTRE | VENCIMIENTOS
+Julio a Diciembre/ 2023 | 15/01/2024
+Enero a Junio/ 2024 | 15/07/2024
+Julio a Diciembre/ 2024 | 15/01/2025
+
+XI - AGENTE DE INFORMACIÓN - RG 19/2018 DGR - VENTAS / COMPRAS / VENTAS EN COMISIÓN – Medicamento • Declaración Jurada Mensual - Formulario SF 179 DDJJ informativa de ventas; SF 180 DDJJ informativa de compras; y/o SF
+
+### guias_tramites_dgr_misiones.txt
+Altas y Modificaciones Online en IIBB
+
+Ingresá con tu Clave Fiscal Nivel 2 y gestioná el Formulario SR 311 de manera online. Ahora con datos declarados en ARCA.
+
+Inscripción en Ingresos Brutos
+
+Para obtener Clave Fiscal, si no la tenés. Ingresá con tu Clave Fiscal Nivel 2 y gestioná el Formulario SR 311 de manera online para altas y modificaciones en IIBB. Ahora con datos declarados en ARCA.
+
+Presentación de Declaración Jurada IIBB
+
+Declaración Jurada y Pago Semanal: 22/09 - 3° semana de Septiembre/2025 (Obligacion N°38) - Recaudación Del 15/09 al 19/09/2025.
+
+Presentación DDJJ e Ingreso Imp. De Sellos Op. Monetarias R.G. N° 029/06 1°quincena Septiembre/2025 – Bancos - Nro. Obligación 17 (25/09).
+
+Presentación SISTEMA SIRTAC: Primer Quincena Septiembre 2025 (26/09).
+
+Planes de Pago y Moratoria
+
+Desde agosto, se actualiza en un 50% los valores para acceder a bonificaciones por cumplimiento en Ingresos Brutos. Más de 35.000 contribuyentes serán beneficiados gracias a la RG 13/2025.
+
+Beneficios Impuesto Inmobiliario: Pago en cuotas, 5% por pago a término, +30% de descuento si emitís la boleta desde nuestra web y si constituís Domicilio Fiscal Electrónico.
+
+### ordenanza_impositiva_posadas_2024.txt
+ANEXO I ORDENANZA GENERAL IMPOSITIVA AÑO 2024
+
+CAPÍTULO I  
+DERECHO DE INSPECCIÓN, REGISTRO Y SERVICIO DE CONTRALOR  
+
+ARTÍCULO 1º.- Fíjanse las siguientes escalas, por derecho de inscripción o habilitación para las actividades previstas en el Artículo 101º del Código Fiscal Municipal (C.F.M.): a) Comercios en General: a.1) Campos de deportes $14.600 a.2) Categoría 1: Supermercados, Almacenes Mayoristas, Distribuidores, etc. $6.200 a.3) Categoría 2: Mini-mercados, Despensas, Carnicerías, Almacenes, etc. $4.900 a.4) Categoría 3: Kioscos, Peluquerías y otras actividades menores $2.000 b) Industrias: b.1) Categoría 1: Grandes industrias $8.900 b.2) Categoría 2: Industrias medianas $6.300 b.3) Categoría 3: Industrias pequeñas $5.000 c) Financieras: c.1) Categoría 1: Bancos y otras entidades financieras $42.200 c.2) Categoría 2: Mini bancos y cajeros automáticos $52.700 d) Otras actividades: d.1) Categoría 1: Lavaderos de autos, de ropas, servicios de limpieza o comida $4.600 d.2) Categoría 2: Actividades no comprendidas en los incisos precedentes $4.300  
+
+ARTÍCULO 2º.- Fijase las alícuotas que se indican a continuación, las que se aplicarán sobre la base imponible prevista en el Artículo 104º del C.F.M. salvo disposiciones especiales de la presente Ordenanza u Ordenanzas Especiales dictadas o a dictarse: 1) Industrias en general - Artículo 106º, inciso 2) del C.F.M. (uno por ciento) 1% 2) Comercios en General - Artículo 106º, inciso 1) del C.F.M. (uno por ciento) 1% 3) Actividades Especiales - Artículo 106º inciso 3) C.F.M. - actividades relacionadas con prestación de servicios: profesionales, electricidad, agua, gas, teléfonos, circuitos cerrado de televisión y afines - abonará sobre el monto imponible, alícuota (dos por ciento) 2% 4) Servicios Forestales, alícuota (dos por ciento) 2% 5) Servicios profesionales (estudio jurídico, contable, escribanías, agrimensura arquitectura, y afines), tasa mínima mensual $6.000  
+
+ARTÍCULO 3º.- Fijase la siguiente escala de tasas mensuales o alícuotas sobre las bases imponibles respectivas para las siguientes actividades especiales, con una tasa mínima mensual de PESOS: TRES MIL NOVECIENTOS ($3.900) (en concepto de anticipo) 1) Categoría 1: Venta de combustibles y Lubricantes, (dos por ciento) 2% 2) Categoría 2: Productores de seguros, agentes, sub-agentes, comisionistas, consignatarios, agencias y sub-agencias de juegos de azar, dos por ciento 2%  
+
+ARTÍCULO 4º.- Fijase en la suma de Pesos: UN MIL CUATROCIENTOS ($1.400) la tasa mínima mensual en concepto de anticipo, para todas las actividades previstas en el presente capítulo, con excepción de los siguientes rubros; por cada anexo a la actividad principal se deberá abonar el equivalente al 50% de la tasa determinada para dicho anexo: 1) Kioscos o similares $3.000 2) Kiosco anexo Pool $3.500 3) Kiosco y Heladería $4.000 4) Tienda $1.600 5) Ciber $1.600 6) Gomería $2.100 7) Lavaderos de vehículos y maquinarias $2.600 8) Taller Verificación Técnica, sonido, ploteo, servicio alineación y balanceo, venta de repuestos, y afines $12.000 9) Verdulerías, fiambrería o vinoteca por cada uno $3.000 10) Zapatería $2.500 11) Despensa $2.500 12) Bar Comedor $2.600 13) Servicio de Delivery $2.000 14) Carritos de comidas (Fast Food) $2.600 15) Panadería y Confitería $4.500 16) Panadería y Confitería - anexo Kiosco $6.500 17) Peluquería $2.500 18) Librería $2.800 19) Heladería, estudio fotográfico, café por cada uno $2.500 20) Telecabina $2.000 21) Farmacia $4.500 22) Talleres (Mecánicos, Chapa y Pintura) $4.500 23) Carpinterías de madera o aluminio y vidrierías $3.500 24) Mueblería $6.000 25) Ferretería $10.000 26) Supermercados $20.000 27) Mini-mercados $17.000 28) Carnicería $10.000 29) Autoservicios $8.600 30) Agencias de quinielas, Sub-Agencias y afines $5.500 31) Supermercados Mayoristas $13.500 32) Boliches, pubs, pistas de bailes $8.300 33) Cajeros Automáticos, p/cada uno $50.000 34) Locales de Gimnasio, Yoga o Sauna, p/cada actividad $2.500 35) Venta de Artículos de Limpieza, Pañalera $2.500 36) Compra-Venta de Muebles y/o otros artículos o implementos usados $5.000 37) Juguetería y Cotillón $2.000 38) Patio de Juegos $2.100 39) Parque Recreativo $2.100 40) Emisoras de Radio $2.100 41) Taller de Compostura de Calzados $2.000 42) Servicios de Ambulancia, por unidad $2.100 43) Taxis y transporte de pasajeros con capacidad p/4 (cuatro) pasajeros $1.300 44) Taxis y transporte de pasajeros con capacidad p/7 (siete) pasajeros $2.500 45) Taxis y transporte de pasajeros con capacidad p/más de 7 (siete) pasajeros $3.100 46) Transporte de pasajeros y servicios especiales $6.200 47) Transporte de pasajeros con capacidad para 14 a 16 personas $6.200 48) Transporte de sustancias alimenticias $6.200 49) Servicio de viandas, rotisería, delivery o servicio de comida rápida $2.000 50) Servicios de lavandería y limpieza $2.000 51) Ventas de Flores $2.000 52) Viveros y Venta de Plantas $3.500 53) Servicios de alarmas, informáticos, venta de insumos, venta y reparación de celulares $2.000 54) Venta de artículos electrónicos, mueblería y/o artículos del hogar $10.000 55) Venta de pasajes $8.000 56) Los contribuyentes afectados a los incisos 39, 40 y 41 de este Artículo, que presten servicio EXCLUSIVAMENTE DENTRO DEL EJIDO MUNICIPAL gozarán de un 50% (cincuenta por ciento) de descuento 57) Empaque (locales de lavado y desinfección de frutas) $23.000 58) Multi rubro por cada rubro $2.500 59) Fabrica de Carbón artesanal $5.000 60) Agroturismo, Camping y afines $2.500 61) Perfumería $4.300 62) Canchas de Paddle $14.200 63) Canchas de Futbol 5 $14.200 64) Canchas de Tenis $14.200 65) Servicio de Alimentación y Hospedaje $4.100 66) Arenera (Extracción de arena) $15.500 67) Agro insumos $9.900 68) Estación de Servicio (por boca de expendio) $15.200 69) Lubricentro $19.200 70) Servicompras $9.500 71) Barbería $2.500 72) Taller Mecánico de Motos $3.500 73) Casa de Repuestos $6.900 74) Centro de Estética $2.500 75) Servicios de Encomiendas $4.900 76) Antena Proveedora de Internet $8.900 77) Fibra Óptica $8.900  
+
+ARTÍCULO 5º.- El pago de la Tasa será Mensual y las fechas de vencimiento, para el período fiscal 2024 será el 20 de cada mes o el día siguiente hábil. Anualmente la Municipalidad podrá solicitar al contribuyente fotocopia de la Declaración Jurada Anual de la Dirección General de Rentas, pudiendo realizar los ajustes de la Tasa y requerir el pago de la diferencia resultante de aplicar las alícuotas fijadas en el Artículo 2º, tomando como anticipo los pagos realizados, si correspondiera, que en ningún caso podrá generar créditos a favor del contribuyente.  
+
+ARTÍCULO 6º.- Licencias: a) Licencia anual para expendio de bebidas alcohólicas $3.800 b) Licencia anual para taller de verificación técnica y afines $11.200  
+
+CAPÍTULO II  
+TASA POR INSPECCIONES VARIAS  
+
+ARTÍCULO 7º.- Derecho de Abasto e introducción, según el Artículo 117 del C.F. y Ordenanza 19/2011, abonarán por los períodos y categorías que se indican a continuación: 1) Furgoneta c/capacidad de hasta 750 Kg. de carga, por cada ingreso $1.000 2) Furgones c/capacidad de hasta 4000 Kg. de carga, por cada ingreso $1.300 3) Camiones c/capacidad de más de 4000 Kg. de carga, por cada ingreso $1.300 4) Abastecedores de cigarrillos, por cada ingreso $1.000 5) Abastecedores de bebidas, por cada ingreso $3.100 6) Abastecedores de gas en garrafa, por ingreso $3.100 7) Abastecedores de repuestos y materiales de construcción, por día $1.300 8) Abastecedores de medicamentos, por cada ingreso $1.200 9) Abastecedores de prendas de vestir y/o calzados $1.500 10) Abastecedores no contemplados en los incisos precedentes $2.100 11) Furgoneta c/capacidad de hasta 750 Kg. de carga, por mes $2.100 12) Furgones c/capacidad de hasta 4000 Kg. de carga, por mes $4.200 13) Camiones c/capacidad de más de 4000 Kg. de carga, por p/mes $4.200 14) Abastecedores de cigarrillos, por mes $2.800 15) Abastecedores de bebidas, por mes $10.600 16) Abastecedores de gas en garrafa por mes $10.600 17) Abastecedores de repuestos y materiales de construcción, por mes $4.700 18) Abastecedores de medicamentos, por mes $2.200 19) Abastecedores de prendas de vestir y/o calzados por mes $2.900 20) Abastecedores no contemplados en los incisos anteriores por mes $5.500 - Los abastecedores que opten por el pago mensual se estima un valor equivalente a 10 entradas, no obstante con dicho pago podrán ingresar los 30 días del mes abonado.  
+
+ARTÍCULO 8º.- Por abasto / introducción de carnes, se abonarán las tasas según la siguiente escala: 1) Por introducción de carnes rojas (vaca, novillo, ternero, cerdo, toro, buey, cabra o cordero), por cada kilogramo $10 2) Por introducción de carnes blancas, (pollo, gallina, pato, pavo, perdiz, codorniz, conejo) por cada unidad $15 3) Por introducción de carnes de pescados, por caja $100 4) Mínimo por cada inspección $700  
+
+ARTÍCULO 9º.- Por los derechos de faenamiento, se abonarán las tasas según la siguiente escala: 1) Por faenamiento expresamente autorizado, por cada animal vacuno $400 2) Por faenamiento expresamente autorizado, por cada animal porcino $200  
+
+CAPÍTULO III  
+TASA GENERAL DE INMUEBLES  
+
+ARTÍCULO 10º.- Fíjanse las siguientes escalas para la liquidación de la Tasa General de Inmuebles, por cada lote, manzana sin subdividir, remanentes de loteos o chacras; para la liquidación se tomará cada bien en forma individual y por año a) ZONA URBANA POR METRO LINEAL DE FRENTE: por cada lote o manzana sin subdividir; en el caso de dos o mas frentes para la liquidación se tomará siempre el frente de mayor categoría
+
+### guias_tramites_posadas.txt
+No se encontró el documento completo en formato PDF. Como alternativa, se compiló información de fuentes web disponibles sobre los trámites solicitados:
+
+Habilitación Comercial: Accede a la Guía de Trámites en el sitio oficial de la Municipalidad de Posadas. Incluye trámites varios para habilitaciones comerciales, con acceso a formularios y nomenclador. Requisitos generales incluyen presentación de documentación como DNI, constancia de inscripción AFIP, planos y pago de tasas.
+
+Libre Deuda Municipal: Solicita el certificado de libre deuda a través del portal de Tasas Municipales / Pago Online con Clave Fiscal - Autogestión. Requiere verificación de deudas pendientes en tasas como TGI o comercio.
+
+Cómo Pagar la Tasa de Inmuebles (TGI): Pago online con débito y crédito disponible en el sitio web. Accede a Tasas Municipales / Pago Online. Opciones incluyen pago anual con bonificación o cuotas mensuales. Para 2024, vencimientos de cuotas: primera cuota vence el 27 de enero; segunda el 16 de marzo; tercera el 15 de abril; cuarta el 15 de mayo; quinta el 16 de junio. Prórrogas posibles hasta fechas como 1° de marzo para anual o primera cuota.
+
+### calendario_fiscal_posadas_2024.txt
+No se encontró un PDF completo del Calendario Fiscal 2024 de la Municipalidad de Posadas. Como alternativa, se compiló información de fuentes oficiales y noticias:
+
+Tasa General de Inmuebles (TGI) 2024:
+- Pago anual o primera cuota: Prórroga hasta 28 de febrero (originalmente 1° de marzo en algunas fuentes).
+- Primera cuota: 27 de enero (con prórroga).
+- Segunda cuota: 16 de marzo.
+- Tercera cuota: 15 de abril.
+- Cuarta cuota: 15 de mayo.
+- Quinta cuota: 16 de junio.
+- Sexta cuota: 20 de julio.
+
+Bonificaciones: 20% para pago total anual. Pago en cuotas con 5% por pago a término.
+
+Otras Tasas Municipales: Vencimientos generales mensuales para tasas de comercio e inspecciones: 20 de cada mes o día hábil siguiente.
+
+Para más detalles, consulta el portal de Tasas Municipales en posadas.gob.ar.
