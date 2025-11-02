@@ -6,6 +6,68 @@ import pandas as pd
 from playwright.sync_api import sync_playwright
 from datetime import datetime, timedelta
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# ==============================================================================
+# FUNCIÓN PARA HACER LOGIN EN EL SISTEMA DE RENTAS
+# ==============================================================================
+def login_rentas(page, username, password):
+    """
+    Realiza el login en el sistema de rentas de la ATM.
+
+    Args:
+        page: Instancia de la página de Playwright
+
+    Returns:
+        bool: True si el login fue exitoso, False en caso contrario
+    """
+    try:
+        print("--- INICIANDO LOGIN EN SISTEMA DE RENTAS ---")
+
+        rentas_username = username
+        rentas_password = password
+
+        if not rentas_username or not rentas_password:
+            print("ERROR: Credenciales de rentas no proporcionadas")
+            return False
+
+        # Navegar a la página principal
+        page.goto("https://extranet.atm.misiones.gob.ar/Extranet/index.php")
+        page.wait_for_load_state("networkidle")
+        print("Página de login cargada.")
+
+        # Hacer clic en el botón SIT
+        page.click("#btn_sit")
+        page.wait_for_timeout(1000)
+        print("Clic en botón SIT realizado.")
+
+        # Rellenar usuario
+        page.fill("#log_user_aux", rentas_username)
+        print(f"Usuario '{rentas_username}' ingresado.")
+
+        # Rellenar contraseña
+        page.fill("#log_pass_aux", rentas_password)
+        print("Contraseña ingresada.")
+
+        # Hacer clic en ingresar
+        page.click("#btn_ingresar")
+        page.wait_for_load_state("networkidle")
+        page.wait_for_timeout(2000)  # Esperar a que se complete el login
+
+        # Verificar si el login fue exitoso (buscar algún elemento que confirme el login)
+        if page.locator("#btn_sit").count() == 0:  # Si ya no está el botón SIT, probablemente estamos logueados
+            print("✅ LOGIN EXITOSO")
+            return True
+        else:
+            print("❌ LOGIN FALLIDO - Verificar credenciales")
+            return False
+
+    except Exception as e:
+        print(f"Error durante el login: {e}")
+        return False
+
 
 # ==============================================================================
 # FUNCIÓN PARA PROCESAR EL ARCHIVO EXCEL (sin cambios)
@@ -50,18 +112,20 @@ def procesar_excel_rentas(ruta_archivo):
 # ==============================================================================
 # FUNCIÓN PRINCIPAL CON PLAYWRIGHT (clic en código "472120" post-búsqueda)
 # ==============================================================================
-def run_rentabot(ruta_archivo):
+def run_rentabot(username, password, monto=None):
     """
     Automatiza el proceso de obtención de datos de rentas y presentación de DDJJ con Playwright.
 
     Args:
-        ruta_archivo (str): Ruta al archivo Excel de rentas (opcional; si no, descarga primero).
+        username (str): Usuario de Renta Misiones
+        password (str): Contraseña de Renta Misiones
+        monto (str, optional): Monto imponible (no usado en rentabot)
 
     Returns:
         tuple: (status, output, error)
-               status (str): 'Success' o 'Failed'.
-               output (str): Mensajes de éxito o información.
-               error (str): Mensajes de error si la ejecución falla.
+                status (str): 'Success' o 'Failed'.
+                output (str): Mensajes de éxito o información.
+                error (str): Mensajes de error si la ejecución falla.
     """
     output_messages = []
     error_messages = []
@@ -75,17 +139,29 @@ def run_rentabot(ruta_archivo):
     os.makedirs(directorio_descargas, exist_ok=True)
     output_messages.append(f"Los archivos se guardarán en: {directorio_descargas}")
 
-    # Puerto debug para conexión a sesión activa (igual que tu debuggerAddress)
+    # Puerto debug para conexión a sesión activa
     debug_port = "http://127.0.0.1:9222"
 
     try:
         with sync_playwright() as p:
-            print("Conectando al navegador Edge en modo debug...")
-            browser = p.chromium.connect_over_cdp(debug_port)
+            print("Iniciando navegador Edge...")
+            # Cambiar a launch en lugar de connect_over_cdp
+            browser = p.chromium.launch(
+                channel="msedge",
+                headless=False  # Cambia a True en producción
+            )
+            context = browser.new_context()
+            page = context.new_page()
             context = browser.contexts[0]  # Usa el contexto existente (con sesión logueada)
             page = context.pages[0] if context.pages else context.new_page()  # Usa página activa o crea nueva
-            
-            output_messages.append("¡Conexión exitosa!")
+
+            output_messages.append("¡Navegador iniciado exitosamente!")
+
+            # --- LOGIN EN SISTEMA DE RENTAS ---
+            if not login_rentas(page, username, password):
+                error_messages.append("ERROR: No se pudo hacer login en el sistema de rentas")
+                status = 'Failed'
+                return status, "\n".join(output_messages), "\n".join(error_messages)
 
             # --- FASE 1: OBTENCIÓN DE DATOS DE RENTAS ---
             output_messages.append("\n--- INICIANDO FASE 1: OBTENCIÓN DE DATOS DE RENTAS ---")
@@ -176,84 +252,10 @@ def run_rentabot(ruta_archivo):
                 page.wait_for_load_state("networkidle")  # Espera que cargue el form de detalles
                 output_messages.append("✅ Obligación editada/abierto form correctamente.")
                 
-                # --- AGREGANDO RUBRO Y LLENANDO FORM (clic en código "472120" post-búsqueda) ---
-                output_messages.append("\n--- AGREGANDO RUBRO Y LLENANDO FORM ---")
-                
-                # Clic en "Agregar Rubro"
-                add_rubro_locator = page.locator("#add_rubro_a_grid")
-                add_rubro_locator.wait_for(state="visible", timeout=10000)
-                add_rubro_locator.click()
-                output_messages.append("Clic en 'Agregar Rubro'...")
-                page.wait_for_selector("#d_actividad_lupa", timeout=10000)
-                page.wait_for_timeout(2000)  # Delay para modal
-                
-                # Doble clic en lupa Actividad
-                actividad_lupa_locator = page.locator("#d_actividad_lupa")
-                actividad_lupa_locator.wait_for(state="visible", timeout=5000)
-                actividad_lupa_locator.dblclick()
-                output_messages.append("Doble clic en lupa 'Actividad'...")
-                page.wait_for_timeout(3000)  # Delay para dropdown/search load
-                
-                # Búsqueda
-                page.fill('input[type="text"]:visible', "venta al por menor")  # Fill en input visible
-                output_messages.append("Buscando 'venta al por menor' en Actividad...")
-                page.wait_for_timeout(2000)  # Delay para filtro
-                
-                # Clic en el código "472120" (o 47210) en el resultado td
-                page.click('td:has-text("472120")')  # Cambia a "47210" si es el código exacto
-                output_messages.append("Clic en código '472120' para seleccionar...")
-                page.wait_for_timeout(1000)  # Delay para cierre dropdown
-                
-                # Screenshot post-selección
-                page.screenshot(path="debug_actividad.png")
-                output_messages.append("Screenshot guardado: debug_actividad.png")
-                
-                # Clic en lupa Facturación y select #0
-                facturacion_lupa_locator = page.locator("#d_facturacion_lupa")
-                facturacion_lupa_locator.wait_for(state="visible", timeout=5000)
-                facturacion_lupa_locator.click()
-                output_messages.append("Clic en lupa 'Facturación'...")
-                page.wait_for_selector("#0", timeout=5000)
-                page.click("#0")
-                output_messages.append("Seleccionada opción '0' en Facturación...")
-                page.wait_for_timeout(1000)
-                
-                # Rellenar base imponible
-                page.fill("#i_base_imponible", base_imponible)
-                output_messages.append(f"Rellenada base imponible: {base_imponible}")
-                page.wait_for_timeout(1000)
-                
-                # Clic en lupa Alícuota y select #0
-                alicuota_lupa_locator = page.locator("#p_alicuota_lupa")
-                alicuota_lupa_locator.wait_for(state="visible", timeout=5000)
-                alicuota_lupa_locator.click()
-                output_messages.append("Clic en lupa 'Alícuota'...")
-                page.wait_for_selector("#0", timeout=5000)
-                page.click("#0")
-                output_messages.append("Seleccionada opción '0' en Alícuota...")
-                page.wait_for_timeout(1000)
-                
-                # Clic en lupa Bonificación y select #1
-                bonificacion_lupa_locator = page.locator("#p_bonificacion_lupa")
-                bonificacion_lupa_locator.wait_for(state="visible", timeout=5000)
-                bonificacion_lupa_locator.click()
-                output_messages.append("Clic en lupa 'Bonificación'...")
-                page.wait_for_selector("#1", timeout=5000)
-                page.click("#1")
-                output_messages.append("Seleccionada opción '1' en Bonificación...")
-                page.wait_for_timeout(1000)
-                
-                # Clic en Guardar
-                guardar_locator = page.locator("#sData")
-                guardar_locator.wait_for(state="visible", timeout=5000)
-                guardar_locator.click()
-                output_messages.append("Clic en 'Guardar'...")
-                page.wait_for_load_state("networkidle")
-                output_messages.append("✅ Rubro agregado y guardado exitosamente.")
-                
-                # Screenshot final
-                page.screenshot(path="debug_final.png")
-                output_messages.append("Screenshot final guardado: debug_final.png")
+                # --- DEMO TERMINA AQUÍ ---
+                output_messages.append("\n--- DEMO COMPLETA HASTA PRESENTACIÓN DE DDJJ ---")
+                output_messages.append("✅ Login, descarga de Excel y navegación a DDJJ completados.")
+                output_messages.append("ℹ️ Para completar la presentación de DDJJ, descomenta el código de 'AGREGANDO RUBRO' más abajo.")
             
             output_messages.append("\nPROCESO COMPLETO DEL BOT FINALIZADO.")
             browser.close()  # Cierra la conexión (no el browser físico)
@@ -273,3 +275,84 @@ if __name__ == "__main__":
     print(output)
     if error:
         print(f"Error: {error}")
+'''
+
+                # --- AGREGANDO RUBRO Y LLENANDO FORM (clic en código "472120" post-búsqueda) ---
+                output_messages.append("\n--- AGREGANDO RUBRO Y LLENANDO FORM ---")
+
+                # Clic en "Agregar Rubro"
+                add_rubro_locator = page.locator("#add_rubro_a_grid")
+                add_rubro_locator.wait_for(state="visible", timeout=10000)
+                add_rubro_locator.click()
+                output_messages.append("Clic en 'Agregar Rubro'...")
+                page.wait_for_selector("#d_actividad_lupa", timeout=10000)
+                page.wait_for_timeout(2000)  # Delay para modal
+
+                # Doble clic en lupa Actividad
+                actividad_lupa_locator = page.locator("#d_actividad_lupa")
+                actividad_lupa_locator.wait_for(state="visible", timeout=5000)
+                actividad_lupa_locator.dblclick()
+                output_messages.append("Doble clic en lupa 'Actividad'...")
+                page.wait_for_timeout(3000)  # Delay para dropdown/search load
+
+                # Búsqueda
+                page.fill('input[type="text"]:visible', "venta al por menor")  # Fill en input visible
+                output_messages.append("Buscando 'venta al por menor' en Actividad...")
+                page.wait_for_timeout(2000)  # Delay para filtro
+
+                # Clic en el código "472120" (o 47210) en el resultado td
+                page.click('td:has-text("472120")')  # Cambia a "47210" si es el código exacto
+                output_messages.append("Clic en código '472120' para seleccionar...")
+                page.wait_for_timeout(1000)  # Delay para cierre dropdown
+
+                # Screenshot post-selección
+                page.screenshot(path="debug_actividad.png")
+                output_messages.append("Screenshot guardado: debug_actividad.png")
+
+                # Clic en lupa Facturación y select #0
+                facturacion_lupa_locator = page.locator("#d_facturacion_lupa")
+                facturacion_lupa_locator.wait_for(state="visible", timeout=5000)
+                facturacion_lupa_locator.click()
+                output_messages.append("Clic en lupa 'Facturación'...")
+                page.wait_for_selector("#0", timeout=5000)
+                page.click("#0")
+                output_messages.append("Seleccionada opción '0' en Facturación...")
+                page.wait_for_timeout(1000)
+
+                # Rellenar base imponible
+                page.fill("#i_base_imponible", base_imponible)
+                output_messages.append(f"Rellenada base imponible: {base_imponible}")
+                page.wait_for_timeout(1000)
+
+                # Clic en lupa Alícuota y select #0
+                alicuota_lupa_locator = page.locator("#p_alicuota_lupa")
+                alicuota_lupa_locator.wait_for(state="visible", timeout=5000)
+                alicuota_lupa_locator.click()
+                output_messages.append("Clic en lupa 'Alícuota'...")
+                page.wait_for_selector("#0", timeout=5000)
+                page.click("#0")
+                output_messages.append("Seleccionada opción '0' en Alícuota...")
+                page.wait_for_timeout(1000)
+
+                # Clic en lupa Bonificación y select #1
+                bonificacion_lupa_locator = page.locator("#p_bonificacion_lupa")
+                bonificacion_lupa_locator.wait_for(state="visible", timeout=5000)
+                bonificacion_lupa_locator.click()
+                output_messages.append("Clic en lupa 'Bonificación'...")
+                page.wait_for_selector("#1", timeout=5000)
+                page.click("#1")
+                output_messages.append("Seleccionada opción '1' en Bonificación...")
+                page.wait_for_timeout(1000)
+
+                # Clic en Guardar
+                guardar_locator = page.locator("#sData")
+                guardar_locator.wait_for(state="visible", timeout=5000)
+                guardar_locator.click()
+                output_messages.append("Clic en 'Guardar'...")
+                page.wait_for_load_state("networkidle")
+                output_messages.append("✅ Rubro agregado y guardado exitosamente.")
+
+                # Screenshot final
+                page.screenshot(path="debug_final.png")
+                output_messages.append("Screenshot final guardado: debug_final.png")
+                '''

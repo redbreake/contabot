@@ -3,6 +3,7 @@ import os
 import sys # Import sys to print path
 from decimal import Decimal, InvalidOperation # Added for amount validation
 
+from django.db import models
 from cryptography.fernet import Fernet
 
 from django.shortcuts import render, redirect
@@ -337,11 +338,11 @@ class EnterMisionesBillingView(LoginRequiredMixin, generic.TemplateView):
             except ValueError as e:
                 messages.error(request, f'Error procesando archivo: {e}')
                 logger.error(f"EnterMisionesBillingView: Error procesando archivo: {e}")
-                return redirect('enter_missions')
+                return redirect('enter_misiones')
         elif not monto:
             messages.error(request, 'Debes ingresar un monto manualmente o subir un archivo.')
             logger.error(f"EnterMisionesBillingView: No se proporcionó monto ni archivo")
-            return redirect('enter_missions')
+            return redirect('enter_misiones')
 
         logger.debug(f"EnterMisionesBillingView: POST request para usuario {user.username}")
         logger.debug(f"EnterMisionesBillingView: Monto final: {monto}")
@@ -382,7 +383,7 @@ class EnterMisionesBillingView(LoginRequiredMixin, generic.TemplateView):
 
             # Ejecutar rentabot.py directamente
             if run_rentabot:
-                run_status, run_output, run_error = run_rentabot(misiones_username, misiones_password, monto_str, driver_path)
+                run_status, run_output, run_error = run_rentabot(misiones_username, misiones_password, monto_str)
             else:
                 run_status, run_output, run_error = ('Failed', 'rentabot not implemented yet', 'rentabot module not found')
 
@@ -533,7 +534,8 @@ class AdminDashboardView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'municipal_app/admin_dashboard.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_superuser:
+        if not request.user.is_staff:
+            messages.error(request, 'No tienes permisos para acceder a esta página.')
             return redirect('dashboard')
         return super().dispatch(request, *args, **kwargs)
 
@@ -570,6 +572,7 @@ class AdminDashboardView(LoginRequiredMixin, generic.TemplateView):
         context['active_users_count'] = User.objects.filter(last_login__gte=active_threshold).count()
 
         # Gráfico de ejecuciones por mes (últimos 6 meses)
+        from django.db import models
         from django.db.models import Count, Q
         from django.db.models.functions import TruncMonth
 
@@ -578,14 +581,14 @@ class AdminDashboardView(LoginRequiredMixin, generic.TemplateView):
         executions_monthly = ExecutionHistory.objects.filter(
             execution_time__gte=six_months_ago
         ).annotate(
-            month=TruncMonth('execution_time')
-        ).values('month').annotate(count=Count('id')).order_by('month')
+            month=models.functions.TruncMonth('execution_time')
+        ).values('month').annotate(count=models.Count('id')).order_by('month')
 
         misiones_executions_monthly = MisionesExecutionHistory.objects.filter(
             execution_time__gte=six_months_ago
         ).annotate(
-            month=TruncMonth('execution_time')
-        ).values('month').annotate(count=Count('id')).order_by('month')
+            month=models.functions.TruncMonth('execution_time')
+        ).values('month').annotate(count=models.Count('id')).order_by('month')
 
         # Para gráficos
         context['executions_labels'] = [e['month'].strftime('%Y-%m') for e in executions_monthly]
